@@ -86,8 +86,8 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__installdirs = "$(DESTDIR)$(plotterdocdir)"
-DATA = $(plotterdoc_DATA)
+am__installdirs = "$(DESTDIR)$(simplegraphplotterdocdir)"
+DATA = $(simplegraphplotterdoc_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -212,8 +212,6 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
-PLOTTER_CFLAGS = @PLOTTER_CFLAGS@
-PLOTTER_LIBS = @PLOTTER_LIBS@
 POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
@@ -222,6 +220,8 @@ RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
+SIMPLEGRAPHPLOTTER_CFLAGS = @SIMPLEGRAPHPLOTTER_CFLAGS@
+SIMPLEGRAPHPLOTTER_LIBS = @SIMPLEGRAPHPLOTTER_LIBS@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
@@ -280,8 +280,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = src po
-plotterdocdir = ${prefix}/doc/plotter
-plotterdoc_DATA = \
+simplegraphplotterdocdir = ${prefix}/doc/simplegraphplotter
+simplegraphplotterdoc_DATA = \
 	README\
 	COPYING\
 	AUTHORS\
@@ -293,7 +293,7 @@ INTLTOOL_FILES = intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in
 
-EXTRA_DIST = $(plotterdoc_DATA) \
+EXTRA_DIST = $(simplegraphplotterdoc_DATA) \
 	$(INTLTOOL_FILES)
 
 DISTCLEANFILES = intltool-extract \
@@ -365,26 +365,26 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
-install-plotterdocDATA: $(plotterdoc_DATA)
+install-simplegraphplotterdocDATA: $(simplegraphplotterdoc_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(plotterdocdir)" || $(MKDIR_P) "$(DESTDIR)$(plotterdocdir)"
-	@list='$(plotterdoc_DATA)'; test -n "$(plotterdocdir)" || list=; \
+	test -z "$(simplegraphplotterdocdir)" || $(MKDIR_P) "$(DESTDIR)$(simplegraphplotterdocdir)"
+	@list='$(simplegraphplotterdoc_DATA)'; test -n "$(simplegraphplotterdocdir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(plotterdocdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(plotterdocdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(simplegraphplotterdocdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(simplegraphplotterdocdir)" || exit $$?; \
 	done
 
-uninstall-plotterdocDATA:
+uninstall-simplegraphplotterdocDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(plotterdoc_DATA)'; test -n "$(plotterdocdir)" || list=; \
+	@list='$(simplegraphplotterdoc_DATA)'; test -n "$(simplegraphplotterdocdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$files" || exit 0; \
-	echo " ( cd '$(DESTDIR)$(plotterdocdir)' && rm -f" $$files ")"; \
-	cd "$(DESTDIR)$(plotterdocdir)" && rm -f $$files
+	echo " ( cd '$(DESTDIR)$(simplegraphplotterdocdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(simplegraphplotterdocdir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -701,7 +701,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(plotterdocdir)"; do \
+	for dir in "$(DESTDIR)$(simplegraphplotterdocdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -752,7 +752,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-plotterdocDATA
+install-data-am: install-simplegraphplotterdocDATA
 
 install-dvi: install-dvi-recursive
 
@@ -798,7 +798,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-local uninstall-plotterdocDATA
+uninstall-am: uninstall-local uninstall-simplegraphplotterdocDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all \
 	ctags-recursive install-am install-strip tags-recursive
@@ -813,18 +813,18 @@ uninstall-am: uninstall-local uninstall-plotterdocDATA
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-plotterdocDATA install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-simplegraphplotterdocDATA install-strip installcheck \
+	installcheck-am installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
 	uninstall uninstall-am uninstall-local \
-	uninstall-plotterdocDATA
+	uninstall-simplegraphplotterdocDATA
 
 
 # Remove doc directory on uninstall
 uninstall-local:
-	-rm -r $(plotterdocdir)
+	-rm -r $(simplegraphplotterdocdir)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -35,7 +35,7 @@ plotter is free software: you can redistribute it and/or modify it
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/plotter/ui/plotter.ui" */
-#define UI_FILE "src/plotter.ui"
+#define UI_FILE "src/simplegraphplotter.ui"
 #define MULTITHREADED 1
 
 void on_toggle(const Glib::ustring& str)

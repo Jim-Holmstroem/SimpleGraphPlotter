@@ -3,8 +3,8 @@
 
 SUBDIRS = src po
 
-plotterdocdir = ${prefix}/doc/plotter
-plotterdoc_DATA = \
+simplegraphplotterdocdir = ${prefix}/doc/simplegraphplotter
+simplegraphplotterdoc_DATA = \
 	README\
 	COPYING\
 	AUTHORS\
@@ -17,7 +17,7 @@ INTLTOOL_FILES = intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in
 
-EXTRA_DIST = $(plotterdoc_DATA) \
+EXTRA_DIST = $(simplegraphplotterdoc_DATA) \
 	$(INTLTOOL_FILES)
 
 DISTCLEANFILES = intltool-extract \
@@ -28,4 +28,4 @@ DISTCLEANFILES = intltool-extract \
 
 # Remove doc directory on uninstall
 uninstall-local:
-	-rm -r $(plotterdocdir)
+	-rm -r $(simplegraphplotterdocdir)

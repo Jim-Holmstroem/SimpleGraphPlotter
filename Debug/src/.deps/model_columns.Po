@@ -1,5 +1,6 @@
-model_columns.o: /home/jim/Programming/cpp/plotter/src/model_columns.cc \
- /home/jim/Programming/cpp/plotter/src/model_columns.h \
+model_columns.o: \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/model_columns.cc \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/model_columns.h \
  /usr/include/gtkmm-3.0/gtkmm/treemodel.h \
  /usr/include/glibmm-2.4/glibmm.h \
  /usr/lib/glibmm-2.4/include/glibmmconfig.h \
@@ -693,7 +694,7 @@ model_columns.o: /home/jim/Programming/cpp/plotter/src/model_columns.cc \
  /usr/lib/pangomm-1.4/include/pangommconfig.h \
  /usr/include/gtkmm-3.0/gtkmm/treemodelcolumn.h
 
-/home/jim/Programming/cpp/plotter/src/model_columns.h:
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/model_columns.h:
 
 /usr/include/gtkmm-3.0/gtkmm/treemodel.h:
 

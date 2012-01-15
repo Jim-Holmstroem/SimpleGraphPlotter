@@ -1,0 +1,30 @@
+
+[Anjuta]
+Geometry=908x875+628+295
+
+[Project Manager]
+Shortcut=SimpleGraphPlotter//SimpleGraphPlotter//src//simplegraphplotter
+Expand=SimpleGraphPlotter%%%SimpleGraphPlotter//SimpleGraphPlotter%%%SimpleGraphPlotter//SimpleGraphPlotter//src%%%SimpleGraphPlotter//SimpleGraphPlotter//src//simplegraphplotter%%%SimpleGraphPlotter//SimpleGraphPlotter//src//ui
+
+[File Loader]
+Files=file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/main.cc#30%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/simplegraphplotter.ui
+
+[Document Manager]
+bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
+
+[Execution]
+Program arguments=
+Program uri=file:///home/jim/Programming/cpp/SimpleGraphPlotter/Debug/src/simplegraphplotter
+Run in terminal=2
+Working directories=file:///home/jim/Programming/cpp/SimpleGraphPlotter
+
+[Build]
+Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Optimized
+Selected Configuration=Debug
+BuildArgs/Default=--enable-maintainer-mode
+BuildArgs/Debug=--enable-maintainer-mode 'CFLAGS=-g -O0' 'CXXFLAGS=-g -O0' 'JFLAGS=-g -O0' 'FFLAGS=-g -O0'
+BuildArgs/Profiling=--enable-maintainer-mode 'CFLAGS=-g -pg' 'CXXFLAGS=-g -pg' 'JFLAGS=-g -pg' 'FFLAGS=-g -pg'
+BuildArgs/Optimized=--enable-maintainer-mode 'CFLAGS=-O2' 'CXXFLAGS=-O2' 'JFLAGS=-O2' 'FFLAGS=-O2'
+
+[Debugger]
+Stop at beginning=2

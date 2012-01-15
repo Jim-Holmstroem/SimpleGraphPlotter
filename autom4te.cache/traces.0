@@ -2836,7 +2836,7 @@ m4trace:configure.ac:29: -1- _LT_COMPILER_OPTION([if $compiler PIC flag $_LT_TAG
      esac], [_LT_TAGVAR(lt_prog_compiler_pic, CXX)=
      _LT_TAGVAR(lt_prog_compiler_can_build_shared, CXX)=no])
 m4trace:configure.ac:29: -1- _LT_LINKER_OPTION([if $compiler static flag $lt_tmp_static_flag works], [lt_cv_prog_compiler_static_works_CXX], [$lt_tmp_static_flag], [], [_LT_TAGVAR(lt_prog_compiler_static, CXX)=])
-m4trace:configure.ac:33: -1- PKG_CHECK_MODULES([PLOTTER], [gtkmm-3.0 ])
+m4trace:configure.ac:33: -1- PKG_CHECK_MODULES([SIMPLEGRAPHPLOTTER], [gtkmm-3.0 ])
 m4trace:configure.ac:33: -1- PKG_PROG_PKG_CONFIG
 m4trace:configure.ac:33: -1- m4_pattern_forbid([^_?PKG_[A-Z_]+$])
 m4trace:configure.ac:33: -1- m4_pattern_allow([^PKG_CONFIG(_(PATH|LIBDIR|SYSROOT_DIR|ALLOW_SYSTEM_(CFLAGS|LIBS)))?$])
@@ -2845,11 +2845,11 @@ m4trace:configure.ac:33: -1- m4_pattern_allow([^PKG_CONFIG$])
 m4trace:configure.ac:33: -1- m4_pattern_allow([^PKG_CONFIG_PATH$])
 m4trace:configure.ac:33: -1- m4_pattern_allow([^PKG_CONFIG_LIBDIR$])
 m4trace:configure.ac:33: -1- m4_pattern_allow([^PKG_CONFIG$])
-m4trace:configure.ac:33: -1- m4_pattern_allow([^PLOTTER_CFLAGS$])
-m4trace:configure.ac:33: -1- m4_pattern_allow([^PLOTTER_LIBS$])
-m4trace:configure.ac:33: -1- PKG_CHECK_EXISTS([gtkmm-3.0 ], [pkg_cv_[]PLOTTER_CFLAGS=`$PKG_CONFIG --[]cflags "gtkmm-3.0 " 2>/dev/null`
+m4trace:configure.ac:33: -1- m4_pattern_allow([^SIMPLEGRAPHPLOTTER_CFLAGS$])
+m4trace:configure.ac:33: -1- m4_pattern_allow([^SIMPLEGRAPHPLOTTER_LIBS$])
+m4trace:configure.ac:33: -1- PKG_CHECK_EXISTS([gtkmm-3.0 ], [pkg_cv_[]SIMPLEGRAPHPLOTTER_CFLAGS=`$PKG_CONFIG --[]cflags "gtkmm-3.0 " 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:33: -1- PKG_CHECK_EXISTS([gtkmm-3.0 ], [pkg_cv_[]PLOTTER_LIBS=`$PKG_CONFIG --[]libs "gtkmm-3.0 " 2>/dev/null`
+m4trace:configure.ac:33: -1- PKG_CHECK_EXISTS([gtkmm-3.0 ], [pkg_cv_[]SIMPLEGRAPHPLOTTER_LIBS=`$PKG_CONFIG --[]libs "gtkmm-3.0 " 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
 m4trace:configure.ac:33: -1- _PKG_SHORT_ERRORS_SUPPORTED
 m4trace:configure.ac:38: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.

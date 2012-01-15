@@ -5,7 +5,7 @@
 #define ENABLE_NLS 1
 
 /* GETTEXT package name */
-#define GETTEXT_PACKAGE "plotter"
+#define GETTEXT_PACKAGE "simplegraphplotter"
 
 /* Define to 1 if you have the `bind_textdomain_codeset' function. */
 #define HAVE_BIND_TEXTDOMAIN_CODESET 1
@@ -57,28 +57,28 @@
 #define LT_OBJDIR ".libs/"
 
 /* Name of package */
-#define PACKAGE "plotter"
+#define PACKAGE "simplegraphplotter"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT ""
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "plotter"
+#define PACKAGE_NAME "simplegraphplotter"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "plotter 0.3"
+#define PACKAGE_STRING "simplegraphplotter 0.5"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "plotter"
+#define PACKAGE_TARNAME "simplegraphplotter"
 
 /* Define to the home page for this package. */
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.3"
+#define PACKAGE_VERSION "0.5"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.3"
+#define VERSION "0.5"

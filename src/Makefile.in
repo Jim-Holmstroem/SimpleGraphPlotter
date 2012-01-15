@@ -35,7 +35,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = plotter$(EXEEXT)
+bin_PROGRAMS = simplegraphplotter$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -48,17 +48,19 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_plotter_OBJECTS = main.$(OBJEXT) model_columns.$(OBJEXT) \
-	function_list_controller.$(OBJEXT) plot_drawingarea.$(OBJEXT)
-plotter_OBJECTS = $(am_plotter_OBJECTS)
+am_simplegraphplotter_OBJECTS = main.$(OBJEXT) \
+	plot_drawingarea.$(OBJEXT) model_columns.$(OBJEXT) \
+	function_list_controller.$(OBJEXT)
+simplegraphplotter_OBJECTS = $(am_simplegraphplotter_OBJECTS)
 am__DEPENDENCIES_1 =
-plotter_DEPENDENCIES = $(am__DEPENDENCIES_1)
+simplegraphplotter_DEPENDENCIES = $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
-plotter_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(plotter_LDFLAGS) $(LDFLAGS) -o $@
+simplegraphplotter_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(simplegraphplotter_LDFLAGS) \
+	$(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -101,8 +103,8 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(plotter_SOURCES)
-DIST_SOURCES = $(plotter_SOURCES)
+SOURCES = $(simplegraphplotter_SOURCES)
+DIST_SOURCES = $(simplegraphplotter_SOURCES)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -208,8 +210,6 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
-PLOTTER_CFLAGS = @PLOTTER_CFLAGS@
-PLOTTER_LIBS = @PLOTTER_LIBS@
 POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
@@ -218,6 +218,8 @@ RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
+SIMPLEGRAPHPLOTTER_CFLAGS = @SIMPLEGRAPHPLOTTER_CFLAGS@
+SIMPLEGRAPHPLOTTER_LIBS = @SIMPLEGRAPHPLOTTER_LIBS@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
@@ -275,29 +277,29 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-uidir = $(datadir)/plotter/ui
-ui_DATA = plotter.ui
+uidir = $(datadir)/simplegraphplotter/ui
+ui_DATA = simplegraphplotter.ui
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
-	$(PLOTTER_CFLAGS)
+	$(SIMPLEGRAPHPLOTTER_CFLAGS)
 
 AM_CFLAGS = \
 	 -Wall\
 	 -g
 
-plotter_SOURCES = \
+simplegraphplotter_SOURCES = \
 	main.cc \
+	plot_drawingarea.h \
+	plot_drawingarea.cc \
 	model_columns.h \
 	model_columns.cc \
 	function_list_controller.h \
-	function_list_controller.cc \
-	plot_drawingarea.h \
-	plot_drawingarea.cc
+	function_list_controller.cc
 
-plotter_LDFLAGS = 
-plotter_LDADD = $(PLOTTER_LIBS)
+simplegraphplotter_LDFLAGS = 
+simplegraphplotter_LDADD = $(SIMPLEGRAPHPLOTTER_LIBS)
 EXTRA_DIST = $(ui_DATA)
 all: all-am
 
@@ -376,9 +378,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-plotter$(EXEEXT): $(plotter_OBJECTS) $(plotter_DEPENDENCIES) 
-	@rm -f plotter$(EXEEXT)
-	$(AM_V_CXXLD)$(plotter_LINK) $(plotter_OBJECTS) $(plotter_LDADD) $(LIBS)
+simplegraphplotter$(EXEEXT): $(simplegraphplotter_OBJECTS) $(simplegraphplotter_DEPENDENCIES) 
+	@rm -f simplegraphplotter$(EXEEXT)
+	$(AM_V_CXXLD)$(simplegraphplotter_LINK) $(simplegraphplotter_OBJECTS) $(simplegraphplotter_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -646,7 +648,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-local uninstall-uiDATA
 # Remove ui directory on uninstall
 uninstall-local:
 	-rm -r $(uidir)
-	-rm -r $(datadir)/plotter
+	-rm -r $(datadir)/simplegraphplotter
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

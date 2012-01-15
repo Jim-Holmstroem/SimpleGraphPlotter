@@ -1,6 +1,6 @@
 function_list_controller.o: \
- /home/jim/Programming/cpp/plotter/src/function_list_controller.cc \
- /home/jim/Programming/cpp/plotter/src/function_list_controller.h \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/function_list_controller.cc \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/function_list_controller.h \
  /usr/include/gtkmm-3.0/gtkmm/treeview.h \
  /usr/lib/gtkmm-3.0/include/gtkmmconfig.h \
  /usr/lib/gdkmm-3.0/include/gdkmmconfig.h \
@@ -838,11 +838,11 @@ function_list_controller.o: \
  /usr/include/gtkmm-3.0/gtkmm/treesortable.h \
  /usr/include/gtkmm-3.0/gtkmm/treedragdest.h \
  /usr/include/gtkmm-3.0/gtkmm/treedragsource.h \
- /home/jim/Programming/cpp/plotter/src/model_columns.h \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/model_columns.h \
  /usr/include/c++/4.6/iostream \
  /usr/include/gtkmm-3.0/gtkmm/treerowreference.h
 
-/home/jim/Programming/cpp/plotter/src/function_list_controller.h:
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/function_list_controller.h:
 
 /usr/include/gtkmm-3.0/gtkmm/treeview.h:
 
@@ -2710,7 +2710,7 @@ function_list_controller.o: \
 
 /usr/include/gtkmm-3.0/gtkmm/treedragsource.h:
 
-/home/jim/Programming/cpp/plotter/src/model_columns.h:
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/model_columns.h:
 
 /usr/include/c++/4.6/iostream:
 

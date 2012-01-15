@@ -15,11 +15,11 @@
 
 
 
-VPATH = /home/jim/Programming/cpp/plotter
-pkgdatadir = $(datadir)/plotter
-pkgincludedir = $(includedir)/plotter
-pkglibdir = $(libdir)/plotter
-pkglibexecdir = $(libexecdir)/plotter
+VPATH = /home/jim/Programming/cpp/SimpleGraphPlotter
+pkgdatadir = $(datadir)/simplegraphplotter
+pkgincludedir = $(includedir)/simplegraphplotter
+pkglibdir = $(libdir)/simplegraphplotter
+pkglibexecdir = $(libexecdir)/simplegraphplotter
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -86,8 +86,8 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__installdirs = "$(DESTDIR)$(plotterdocdir)"
-DATA = $(plotterdoc_DATA)
+am__installdirs = "$(DESTDIR)$(simplegraphplotterdocdir)"
+DATA = $(simplegraphplotterdoc_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -132,14 +132,14 @@ DIST_ARCHIVES = $(distdir).tar.gz
 GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run aclocal-1.11
+ACLOCAL = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run aclocal-1.11
 ALL_LINGUAS = 
-AMTAR = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run tar
+AMTAR = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run tar
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUTOCONF = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run automake-1.11
+AUTOCONF = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run automake-1.11
 AWK = mawk
 CATALOGS = 
 CATOBJEXT = .gmo
@@ -165,7 +165,7 @@ ECHO_T =
 EGREP = /bin/grep -E
 EXEEXT = 
 FGREP = /bin/grep -F
-GETTEXT_PACKAGE = plotter
+GETTEXT_PACKAGE = simplegraphplotter
 GMOFILES = 
 GMSGFMT = /usr/bin/msgfmt
 GREP = /bin/grep
@@ -188,10 +188,10 @@ LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
-MKINSTALLDIRS = /home/jim/Programming/cpp/plotter/mkinstalldirs
+MKINSTALLDIRS = /home/jim/Programming/cpp/SimpleGraphPlotter/mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
 MSGFMT_OPTS = -c
 MSGMERGE = /usr/bin/msgmerge
@@ -201,19 +201,17 @@ OBJDUMP = objdump
 OBJEXT = o
 OTOOL = 
 OTOOL64 = 
-PACKAGE = plotter
+PACKAGE = simplegraphplotter
 PACKAGE_BUGREPORT = 
-PACKAGE_NAME = plotter
-PACKAGE_STRING = plotter 0.3
-PACKAGE_TARNAME = plotter
+PACKAGE_NAME = simplegraphplotter
+PACKAGE_STRING = simplegraphplotter 0.5
+PACKAGE_TARNAME = simplegraphplotter
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.3
+PACKAGE_VERSION = 0.5
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
 PKG_CONFIG_LIBDIR = 
 PKG_CONFIG_PATH = 
-PLOTTER_CFLAGS = -pthread -DGSEAL_ENABLE -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/gio-unix-2.0/ -I/usr/include/gtkmm-3.0 -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/lib/giomm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/gtk-3.0 -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include  
-PLOTTER_LIBS = -pthread -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lgtk-3 -lglibmm-2.4 -lcairomm-1.0 -lgdk-3 -latk-1.0 -lcairo-gobject -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lpango-1.0 -lfreetype -lfontconfig -lgmodule-2.0 -lcairo -lsigc-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0  
 POFILES = 
 POSUB = po
 PO_IN_DATADIR_FALSE = 
@@ -222,14 +220,16 @@ RANLIB = ranlib
 SED = /bin/sed
 SET_MAKE = 
 SHELL = /bin/bash
+SIMPLEGRAPHPLOTTER_CFLAGS = -pthread -DGSEAL_ENABLE -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/gio-unix-2.0/ -I/usr/include/gtkmm-3.0 -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/lib/giomm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/gtk-3.0 -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include  
+SIMPLEGRAPHPLOTTER_LIBS = -pthread -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lgtk-3 -lglibmm-2.4 -lcairomm-1.0 -lgdk-3 -latk-1.0 -lcairo-gobject -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lpango-1.0 -lfreetype -lfontconfig -lgmodule-2.0 -lcairo -lsigc-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0  
 STRIP = strip
 USE_NLS = yes
-VERSION = 0.3
+VERSION = 0.5
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/jim/Programming/cpp/plotter/Debug
-abs_srcdir = /home/jim/Programming/cpp/plotter
-abs_top_builddir = /home/jim/Programming/cpp/plotter/Debug
-abs_top_srcdir = /home/jim/Programming/cpp/plotter
+abs_builddir = /home/jim/Programming/cpp/SimpleGraphPlotter/Debug
+abs_srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter
+abs_top_builddir = /home/jim/Programming/cpp/SimpleGraphPlotter/Debug
+abs_top_srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -259,7 +259,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/jim/Programming/cpp/plotter/install-sh
+install_sh = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -273,15 +273,15 @@ program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
-srcdir = /home/jim/Programming/cpp/plotter
+srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter
 sysconfdir = ${prefix}/etc
 target_alias = 
 top_build_prefix = 
 top_builddir = .
-top_srcdir = /home/jim/Programming/cpp/plotter
+top_srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter
 SUBDIRS = src po
-plotterdocdir = ${prefix}/doc/plotter
-plotterdoc_DATA = \
+simplegraphplotterdocdir = ${prefix}/doc/simplegraphplotter
+simplegraphplotterdoc_DATA = \
 	README\
 	COPYING\
 	AUTHORS\
@@ -293,7 +293,7 @@ INTLTOOL_FILES = intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in
 
-EXTRA_DIST = $(plotterdoc_DATA) \
+EXTRA_DIST = $(simplegraphplotterdoc_DATA) \
 	$(INTLTOOL_FILES)
 
 DISTCLEANFILES = intltool-extract \
@@ -365,26 +365,26 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
-install-plotterdocDATA: $(plotterdoc_DATA)
+install-simplegraphplotterdocDATA: $(simplegraphplotterdoc_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(plotterdocdir)" || $(MKDIR_P) "$(DESTDIR)$(plotterdocdir)"
-	@list='$(plotterdoc_DATA)'; test -n "$(plotterdocdir)" || list=; \
+	test -z "$(simplegraphplotterdocdir)" || $(MKDIR_P) "$(DESTDIR)$(simplegraphplotterdocdir)"
+	@list='$(simplegraphplotterdoc_DATA)'; test -n "$(simplegraphplotterdocdir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(plotterdocdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(plotterdocdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(simplegraphplotterdocdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(simplegraphplotterdocdir)" || exit $$?; \
 	done
 
-uninstall-plotterdocDATA:
+uninstall-simplegraphplotterdocDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(plotterdoc_DATA)'; test -n "$(plotterdocdir)" || list=; \
+	@list='$(simplegraphplotterdoc_DATA)'; test -n "$(simplegraphplotterdocdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$files" || exit 0; \
-	echo " ( cd '$(DESTDIR)$(plotterdocdir)' && rm -f" $$files ")"; \
-	cd "$(DESTDIR)$(plotterdocdir)" && rm -f $$files
+	echo " ( cd '$(DESTDIR)$(simplegraphplotterdocdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(simplegraphplotterdocdir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -701,7 +701,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(plotterdocdir)"; do \
+	for dir in "$(DESTDIR)$(simplegraphplotterdocdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -752,7 +752,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-plotterdocDATA
+install-data-am: install-simplegraphplotterdocDATA
 
 install-dvi: install-dvi-recursive
 
@@ -798,7 +798,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-local uninstall-plotterdocDATA
+uninstall-am: uninstall-local uninstall-simplegraphplotterdocDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all \
 	ctags-recursive install-am install-strip tags-recursive
@@ -813,18 +813,18 @@ uninstall-am: uninstall-local uninstall-plotterdocDATA
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-plotterdocDATA install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-simplegraphplotterdocDATA install-strip installcheck \
+	installcheck-am installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
 	uninstall uninstall-am uninstall-local \
-	uninstall-plotterdocDATA
+	uninstall-simplegraphplotterdocDATA
 
 
 # Remove doc directory on uninstall
 uninstall-local:
-	-rm -r $(plotterdocdir)
+	-rm -r $(simplegraphplotterdocdir)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

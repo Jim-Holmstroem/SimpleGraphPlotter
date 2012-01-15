@@ -1,6 +1,6 @@
 plot_drawingarea.o: \
- /home/jim/Programming/cpp/plotter/src/plot_drawingarea.cc \
- /home/jim/Programming/cpp/plotter/src/plot_drawingarea.h \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/plot_drawingarea.cc \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/plot_drawingarea.h \
  /usr/include/cairomm-1.0/cairomm/context.h /usr/include/c++/4.6/vector \
  /usr/include/c++/4.6/bits/stl_algobase.h \
  /usr/include/c++/4.6/x86_64-linux-gnu/./bits/c++config.h \
@@ -798,7 +798,7 @@ plot_drawingarea.o: \
  /usr/include/gtkmm-3.0/gtkmm/iconset.h \
  /usr/include/gtkmm-3.0/gtkmm/widgetpath.h
 
-/home/jim/Programming/cpp/plotter/src/plot_drawingarea.h:
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/plot_drawingarea.h:
 
 /usr/include/cairomm-1.0/cairomm/context.h:
 

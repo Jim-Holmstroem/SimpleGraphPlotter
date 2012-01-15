@@ -3,34 +3,34 @@
 ## Created by Anjuta
 
 
-uidir = $(datadir)/plotter/ui
-ui_DATA = plotter.ui
+uidir = $(datadir)/simplegraphplotter/ui
+ui_DATA = simplegraphplotter.ui
 
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
-	$(PLOTTER_CFLAGS)
+	$(SIMPLEGRAPHPLOTTER_CFLAGS)
 
 AM_CFLAGS =\
 	 -Wall\
 	 -g
 
-bin_PROGRAMS = plotter
+bin_PROGRAMS = simplegraphplotter
 
-plotter_SOURCES = \
+simplegraphplotter_SOURCES = \
 	main.cc \
+	plot_drawingarea.h \
+	plot_drawingarea.cc \
 	model_columns.h \
 	model_columns.cc \
 	function_list_controller.h \
-	function_list_controller.cc \
-	plot_drawingarea.h \
-	plot_drawingarea.cc
+	function_list_controller.cc
 
-plotter_LDFLAGS = 
+simplegraphplotter_LDFLAGS = 
 
-plotter_LDADD = $(PLOTTER_LIBS)
+simplegraphplotter_LDADD = $(SIMPLEGRAPHPLOTTER_LIBS)
 
 
 EXTRA_DIST = $(ui_DATA)
@@ -38,5 +38,5 @@ EXTRA_DIST = $(ui_DATA)
 # Remove ui directory on uninstall
 uninstall-local:
 	-rm -r $(uidir)
-	-rm -r $(datadir)/plotter
+	-rm -r $(datadir)/simplegraphplotter
 

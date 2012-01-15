@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(plotter, 0.3)
+AC_INIT(simplegraphplotter, 0.5)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -19,7 +19,7 @@ dnl Internationalization
 dnl ***************************************************************************
 IT_PROG_INTLTOOL([0.35.0])
 
-GETTEXT_PACKAGE=plotter
+GETTEXT_PACKAGE=simplegraphplotter
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 AM_GLIB_GNU_GETTEXT
@@ -30,7 +30,7 @@ LT_INIT
 
 
 
-PKG_CHECK_MODULES(PLOTTER, [gtkmm-3.0 ])
+PKG_CHECK_MODULES(SIMPLEGRAPHPLOTTER, [gtkmm-3.0 ])
 
 
 

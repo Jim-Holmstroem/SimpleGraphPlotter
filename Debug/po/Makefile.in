@@ -17,16 +17,16 @@
 # We have the following line for use by intltoolize:
 # INTLTOOL_MAKEFILE
 
-GETTEXT_PACKAGE = plotter
-PACKAGE = plotter
-VERSION = 0.3
+GETTEXT_PACKAGE = simplegraphplotter
+PACKAGE = simplegraphplotter
+VERSION = 0.5
 
 SHELL = /bin/bash
 
-srcdir = /home/jim/Programming/cpp/plotter/po
-top_srcdir = /home/jim/Programming/cpp/plotter
+srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter/po
+top_srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter
 top_builddir = ..
-VPATH = /home/jim/Programming/cpp/plotter/po
+VPATH = /home/jim/Programming/cpp/SimpleGraphPlotter/po
 
 prefix = /usr/local
 exec_prefix = ${prefix}
@@ -36,7 +36,7 @@ libdir = ${exec_prefix}/lib
 DATADIRNAME = share
 itlocaledir = $(prefix)/$(DATADIRNAME)/locale
 subdir = po
-install_sh = ${SHELL} /home/jim/Programming/cpp/plotter/install-sh
+install_sh = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/install-sh
 # Automake >= 1.8 provides /bin/mkdir -p.
 # Until it can be supposed, use the safe fallback:
 mkdir_p = $(install_sh) -d

@@ -16,11 +16,11 @@
 
 
 
-VPATH = /home/jim/Programming/cpp/plotter/src
-pkgdatadir = $(datadir)/plotter
-pkgincludedir = $(includedir)/plotter
-pkglibdir = $(libdir)/plotter
-pkglibexecdir = $(libexecdir)/plotter
+VPATH = /home/jim/Programming/cpp/SimpleGraphPlotter/src
+pkgdatadir = $(datadir)/simplegraphplotter
+pkgincludedir = $(includedir)/simplegraphplotter
+pkglibdir = $(libdir)/simplegraphplotter
+pkglibexecdir = $(libexecdir)/simplegraphplotter
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -35,7 +35,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = x86_64-unknown-linux-gnu
-bin_PROGRAMS = plotter$(EXEEXT)
+bin_PROGRAMS = simplegraphplotter$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -48,17 +48,19 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_plotter_OBJECTS = main.$(OBJEXT) model_columns.$(OBJEXT) \
-	function_list_controller.$(OBJEXT) plot_drawingarea.$(OBJEXT)
-plotter_OBJECTS = $(am_plotter_OBJECTS)
+am_simplegraphplotter_OBJECTS = main.$(OBJEXT) \
+	plot_drawingarea.$(OBJEXT) model_columns.$(OBJEXT) \
+	function_list_controller.$(OBJEXT)
+simplegraphplotter_OBJECTS = $(am_simplegraphplotter_OBJECTS)
 am__DEPENDENCIES_1 =
-plotter_DEPENDENCIES = $(am__DEPENDENCIES_1)
+simplegraphplotter_DEPENDENCIES = $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
-plotter_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(plotter_LDFLAGS) $(LDFLAGS) -o $@
+simplegraphplotter_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(simplegraphplotter_LDFLAGS) \
+	$(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -101,8 +103,8 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(plotter_SOURCES)
-DIST_SOURCES = $(plotter_SOURCES)
+SOURCES = $(simplegraphplotter_SOURCES)
+DIST_SOURCES = $(simplegraphplotter_SOURCES)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -128,14 +130,14 @@ DATA = $(ui_DATA)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run aclocal-1.11
+ACLOCAL = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run aclocal-1.11
 ALL_LINGUAS = 
-AMTAR = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run tar
+AMTAR = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run tar
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUTOCONF = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run automake-1.11
+AUTOCONF = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run automake-1.11
 AWK = mawk
 CATALOGS = 
 CATOBJEXT = .gmo
@@ -161,7 +163,7 @@ ECHO_T =
 EGREP = /bin/grep -E
 EXEEXT = 
 FGREP = /bin/grep -F
-GETTEXT_PACKAGE = plotter
+GETTEXT_PACKAGE = simplegraphplotter
 GMOFILES = 
 GMSGFMT = /usr/bin/msgfmt
 GREP = /bin/grep
@@ -184,10 +186,10 @@ LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/jim/Programming/cpp/plotter/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/missing --run makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
-MKINSTALLDIRS = /home/jim/Programming/cpp/plotter/mkinstalldirs
+MKINSTALLDIRS = /home/jim/Programming/cpp/SimpleGraphPlotter/mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
 MSGFMT_OPTS = -c
 MSGMERGE = /usr/bin/msgmerge
@@ -197,19 +199,17 @@ OBJDUMP = objdump
 OBJEXT = o
 OTOOL = 
 OTOOL64 = 
-PACKAGE = plotter
+PACKAGE = simplegraphplotter
 PACKAGE_BUGREPORT = 
-PACKAGE_NAME = plotter
-PACKAGE_STRING = plotter 0.3
-PACKAGE_TARNAME = plotter
+PACKAGE_NAME = simplegraphplotter
+PACKAGE_STRING = simplegraphplotter 0.5
+PACKAGE_TARNAME = simplegraphplotter
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.3
+PACKAGE_VERSION = 0.5
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
 PKG_CONFIG_LIBDIR = 
 PKG_CONFIG_PATH = 
-PLOTTER_CFLAGS = -pthread -DGSEAL_ENABLE -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/gio-unix-2.0/ -I/usr/include/gtkmm-3.0 -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/lib/giomm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/gtk-3.0 -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include  
-PLOTTER_LIBS = -pthread -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lgtk-3 -lglibmm-2.4 -lcairomm-1.0 -lgdk-3 -latk-1.0 -lcairo-gobject -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lpango-1.0 -lfreetype -lfontconfig -lgmodule-2.0 -lcairo -lsigc-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0  
 POFILES = 
 POSUB = po
 PO_IN_DATADIR_FALSE = 
@@ -218,14 +218,16 @@ RANLIB = ranlib
 SED = /bin/sed
 SET_MAKE = 
 SHELL = /bin/bash
+SIMPLEGRAPHPLOTTER_CFLAGS = -pthread -DGSEAL_ENABLE -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/gio-unix-2.0/ -I/usr/include/gtkmm-3.0 -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/lib/giomm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/gtk-3.0 -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include  
+SIMPLEGRAPHPLOTTER_LIBS = -pthread -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lgtk-3 -lglibmm-2.4 -lcairomm-1.0 -lgdk-3 -latk-1.0 -lcairo-gobject -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lpango-1.0 -lfreetype -lfontconfig -lgmodule-2.0 -lcairo -lsigc-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0  
 STRIP = strip
 USE_NLS = yes
-VERSION = 0.3
+VERSION = 0.5
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/jim/Programming/cpp/plotter/Debug/src
-abs_srcdir = /home/jim/Programming/cpp/plotter/src
-abs_top_builddir = /home/jim/Programming/cpp/plotter/Debug
-abs_top_srcdir = /home/jim/Programming/cpp/plotter
+abs_builddir = /home/jim/Programming/cpp/SimpleGraphPlotter/Debug/src
+abs_srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter/src
+abs_top_builddir = /home/jim/Programming/cpp/SimpleGraphPlotter/Debug
+abs_top_srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -255,7 +257,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/jim/Programming/cpp/plotter/install-sh
+install_sh = ${SHELL} /home/jim/Programming/cpp/SimpleGraphPlotter/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -269,35 +271,35 @@ program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
-srcdir = /home/jim/Programming/cpp/plotter/src
+srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter/src
 sysconfdir = ${prefix}/etc
 target_alias = 
 top_build_prefix = ../
 top_builddir = ..
-top_srcdir = /home/jim/Programming/cpp/plotter
-uidir = $(datadir)/plotter/ui
-ui_DATA = plotter.ui
+top_srcdir = /home/jim/Programming/cpp/SimpleGraphPlotter
+uidir = $(datadir)/simplegraphplotter/ui
+ui_DATA = simplegraphplotter.ui
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
-	$(PLOTTER_CFLAGS)
+	$(SIMPLEGRAPHPLOTTER_CFLAGS)
 
 AM_CFLAGS = \
 	 -Wall\
 	 -g
 
-plotter_SOURCES = \
+simplegraphplotter_SOURCES = \
 	main.cc \
+	plot_drawingarea.h \
+	plot_drawingarea.cc \
 	model_columns.h \
 	model_columns.cc \
 	function_list_controller.h \
-	function_list_controller.cc \
-	plot_drawingarea.h \
-	plot_drawingarea.cc
+	function_list_controller.cc
 
-plotter_LDFLAGS = 
-plotter_LDADD = $(PLOTTER_LIBS)
+simplegraphplotter_LDFLAGS = 
+simplegraphplotter_LDADD = $(SIMPLEGRAPHPLOTTER_LIBS)
 EXTRA_DIST = $(ui_DATA)
 all: all-am
 
@@ -376,9 +378,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-plotter$(EXEEXT): $(plotter_OBJECTS) $(plotter_DEPENDENCIES) 
-	@rm -f plotter$(EXEEXT)
-	$(AM_V_CXXLD)$(plotter_LINK) $(plotter_OBJECTS) $(plotter_LDADD) $(LIBS)
+simplegraphplotter$(EXEEXT): $(simplegraphplotter_OBJECTS) $(simplegraphplotter_DEPENDENCIES) 
+	@rm -f simplegraphplotter$(EXEEXT)
+	$(AM_V_CXXLD)$(simplegraphplotter_LINK) $(simplegraphplotter_OBJECTS) $(simplegraphplotter_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -646,7 +648,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-local uninstall-uiDATA
 # Remove ui directory on uninstall
 uninstall-local:
 	-rm -r $(uidir)
-	-rm -r $(datadir)/plotter
+	-rm -r $(datadir)/simplegraphplotter
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
