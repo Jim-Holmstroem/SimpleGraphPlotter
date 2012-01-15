@@ -1,6 +1,6 @@
 #include "variable.h"
 double 
-parser::variable::eval(double x) const{
+parser::variable::operator()(double x) const{
     return x;
 };
 

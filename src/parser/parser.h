@@ -1,5 +1,5 @@
-#ifndef PARSER_PARSER
-#define PARSER_PARSER
+#ifndef PARSER_PARSER_H
+#define PARSER_PARSER_H
 
 #include <string>
 #include <vector>
@@ -76,9 +76,9 @@ namespace parser {
 
     public:
         virtual iexpression* parse(std::string expr);
-        
-        explicit parser();
 
+		static parser* get_instance(); //TODO could make templated singelton class as interface as singelton<parser> (perhaps add it later)
+		~parser();
     protected:
         std::string _expr;
 
@@ -102,7 +102,13 @@ namespace parser {
         unary_container _unary_ops; //map<level,map<token,operator>>
         binary_container _binary_ops;
         int _max_level;
-    };
+
+	private:
+		static bool instance_flag;
+		static parser* instance;
+        explicit parser();
+	};
+
 
 }
 

@@ -11,7 +11,7 @@ namespace parser {
             : _c(c) 
         {
         };
-        virtual double eval(double x) const;
+        virtual double operator()(double x) const;
         virtual ~constant() 
         {
         };    

@@ -8,6 +8,9 @@
 #include "unary_operation.h"
 #include "binary_operation.h"
 
+bool parser::parser::instance_flag=false; //C++ can sometimes be ugly  with static, you actually need to allocate it somewhere. 
+parser::parser* parser::parser::instance=NULL;
+
 parser::parser::parser() {
     
     _functions = function_container();
@@ -56,6 +59,26 @@ parser::parser::parser() {
 
     _max_level=5; //NOTE magicnumber, should bu max(key)
 
+};
+
+parser::parser::~parser()
+{
+	parser::instance_flag=false;
+};
+
+parser::parser* 
+parser::parser::get_instance() 
+{
+	if(!parser::instance_flag)
+	{
+		parser::instance = new parser();
+		parser::instance_flag = true;
+		return parser::instance;
+	}
+	else
+	{
+		return parser::instance;
+	}
 };
 
 bool
@@ -144,7 +167,6 @@ parser::parser::read_expression(int level) {
             unary_operator uop = read_unary_operator(level); //POTENTIAL BUG: execution order unknown f(a(),b()), always do it one step at the time
             iexpression* inner_expression = read_expression(level+1);
             left = new unary_operation(uop,inner_expression); //TODO the word "expression" is large and the problem should be split up into multiple parsing step, not just one big one
-        //BUG verfiy that -1+1 works (wich it don't for python)
         }
         else
         {     
@@ -158,11 +180,10 @@ parser::parser::read_expression(int level) {
             return new binary_operation(bop,left,right);
         }
         else
-        { //nothing todo, just pass it on
+        {
             return left;
         }
     }
-    throw parse_exception("something went wrong in the parsing, shouldn't be here");
 };
 
 bool

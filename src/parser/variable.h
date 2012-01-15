@@ -1,5 +1,5 @@
-#ifndef PARSER_VARIABLE
-#define PARSER_VARIABLE
+#ifndef PARSER_VARIABLE_H
+#define PARSER_VARIABLE_H
 
 #include "iexpression.h"
 
@@ -10,7 +10,7 @@ namespace parser {
         explicit variable()
         {
         };
-        virtual double eval(double x) const;
+        virtual double operator()(double x) const;
         virtual ~variable()
         {
         };

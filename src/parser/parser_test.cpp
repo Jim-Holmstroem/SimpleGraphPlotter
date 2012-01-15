@@ -9,18 +9,19 @@
 
 int 
 main(int argc,const char* argv[]) {
-    parser::parser p = parser::parser();
+    parser::parser* p = parser::parser::get_instance();
     std::cout.precision(15);
 	
-    parser::iexpression* e = p.parse(argv[1]);
+    parser::iexpression* e = p->parse(argv[1]);
 
     std::stringstream ss;
     ss.str(argv[2]);
     double x;
     ss>>x;
 
-    std::cout << e->eval(x) << std::endl;
+    std::cout << (*e)(x) << std::endl;
 
     delete e;
+	delete p;
 
 };

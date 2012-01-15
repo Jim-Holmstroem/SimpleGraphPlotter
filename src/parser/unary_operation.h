@@ -1,5 +1,5 @@
-#ifndef PARSER_UNARY_OPERATION
-#define PARSER_UNART_OPERATION
+#ifndef PARSER_UNARY_OPERATION_H
+#define PARSER_UNART_OPERATION_H
 
 #include "iexpression.h"
 
@@ -13,7 +13,7 @@ namespace parser {
         , _left(left)
         {  
         };
-        virtual double eval(double x) const;
+        virtual double operator()(double x) const;
         virtual ~unary_operation() 
         {
             delete _left;
