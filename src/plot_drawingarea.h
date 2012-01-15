@@ -19,8 +19,12 @@ plotter is free software: you can redistribute it and/or modify it
 #ifndef PLOTTER_PLOTAREA_H
 #define PLOTTER_PLOTAREA_H
 
+#include <vector>
+
 #include <cairomm/context.h>
 #include <gtkmm/drawingarea.h>
+#include "function.h"
+
 
 namespace plotter {
 
@@ -29,9 +33,11 @@ namespace plotter {
 	public:
 		plot_drawingarea();
 		virtual ~plot_drawingarea();
+		void set_functions(const std::vector<function>& functions){_functions = functions;};
+		
 	protected:
 		virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
-	
+		std::vector<function> _functions;
 	};
 
 };

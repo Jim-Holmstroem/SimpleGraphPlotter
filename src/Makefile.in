@@ -51,8 +51,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am_parser_OBJECTS = binary_operation.$(OBJEXT) complex.$(OBJEXT) \
 	constant.$(OBJEXT) iexpression.$(OBJEXT) iparser.$(OBJEXT) \
 	parser.$(OBJEXT) parser_test.$(OBJEXT) \
-	unary_operation.$(OBJEXT) variable.$(OBJEXT) \
-	function.$(OBJEXT)
+	unary_operation.$(OBJEXT) variable.$(OBJEXT)
 parser_OBJECTS = $(am_parser_OBJECTS)
 parser_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_$(V))
@@ -60,7 +59,8 @@ am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
 am_simplegraphplotter_OBJECTS = main.$(OBJEXT) \
 	plot_drawingarea.$(OBJEXT) model_columns.$(OBJEXT) \
-	function_list_controller.$(OBJEXT)
+	function_list_controller.$(OBJEXT) pmath.$(OBJEXT) \
+	function.$(OBJEXT)
 simplegraphplotter_OBJECTS = $(am_simplegraphplotter_OBJECTS)
 am__DEPENDENCIES_1 =
 simplegraphplotter_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -303,7 +303,11 @@ simplegraphplotter_SOURCES = \
 	model_columns.h \
 	model_columns.cc \
 	function_list_controller.h \
-	function_list_controller.cc
+	function_list_controller.cc \
+	pmath.cc \
+	pmath.h \
+	function.cc \
+	function.h
 
 simplegraphplotter_LDFLAGS = 
 simplegraphplotter_LDADD = $(SIMPLEGRAPHPLOTTER_LIBS)
@@ -325,9 +329,7 @@ parser_SOURCES = \
 	parser/unary_operation.cpp \
 	parser/unary_operation.h \
 	parser/variable.cpp \
-	parser/variable.h \
-	function.h \
-	function.cc
+	parser/variable.h
 
 EXTRA_DIST = $(ui_DATA)
 all: all-am
@@ -432,6 +434,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/parser_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plot_drawingarea.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pmath.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unary_operation.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/variable.Po@am__quote@
 

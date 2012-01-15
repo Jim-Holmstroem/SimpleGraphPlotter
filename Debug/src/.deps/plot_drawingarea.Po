@@ -1,8 +1,7 @@
 plot_drawingarea.o: \
  /home/jim/Programming/cpp/SimpleGraphPlotter/src/plot_drawingarea.cc \
  /home/jim/Programming/cpp/SimpleGraphPlotter/src/plot_drawingarea.h \
- /usr/include/cairomm-1.0/cairomm/context.h /usr/include/c++/4.6/vector \
- /usr/include/c++/4.6/bits/stl_algobase.h \
+ /usr/include/c++/4.6/vector /usr/include/c++/4.6/bits/stl_algobase.h \
  /usr/include/c++/4.6/x86_64-linux-gnu/./bits/c++config.h \
  /usr/include/c++/4.6/x86_64-linux-gnu/./bits/os_defines.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/bits/predefs.h \
@@ -30,7 +29,8 @@ plot_drawingarea.o: \
  /usr/include/c++/4.6/initializer_list \
  /usr/include/c++/4.6/bits/stl_bvector.h \
  /usr/include/c++/4.6/bits/range_access.h \
- /usr/include/c++/4.6/bits/vector.tcc /usr/include/c++/4.6/utility \
+ /usr/include/c++/4.6/bits/vector.tcc \
+ /usr/include/cairomm-1.0/cairomm/context.h /usr/include/c++/4.6/utility \
  /usr/include/c++/4.6/bits/stl_relops.h \
  /usr/include/cairomm-1.0/cairomm/surface.h /usr/include/c++/4.6/string \
  /usr/include/c++/4.6/bits/stringfwd.h \
@@ -796,11 +796,12 @@ plot_drawingarea.o: \
  /usr/include/gtkmm-3.0/gtkmm/border.h \
  /usr/include/gtkmm-3.0/gtkmm/iconsource.h \
  /usr/include/gtkmm-3.0/gtkmm/iconset.h \
- /usr/include/gtkmm-3.0/gtkmm/widgetpath.h
+ /usr/include/gtkmm-3.0/gtkmm/widgetpath.h \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/function.h \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/iexpression.h \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/pmath.h
 
 /home/jim/Programming/cpp/SimpleGraphPlotter/src/plot_drawingarea.h:
-
-/usr/include/cairomm-1.0/cairomm/context.h:
 
 /usr/include/c++/4.6/vector:
 
@@ -871,6 +872,8 @@ plot_drawingarea.o: \
 /usr/include/c++/4.6/bits/range_access.h:
 
 /usr/include/c++/4.6/bits/vector.tcc:
+
+/usr/include/cairomm-1.0/cairomm/context.h:
 
 /usr/include/c++/4.6/utility:
 
@@ -2583,3 +2586,9 @@ plot_drawingarea.o: \
 /usr/include/gtkmm-3.0/gtkmm/iconset.h:
 
 /usr/include/gtkmm-3.0/gtkmm/widgetpath.h:
+
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/function.h:
+
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/iexpression.h:
+
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/pmath.h:

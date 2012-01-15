@@ -28,8 +28,10 @@ simplegraphplotter_SOURCES = \
 	model_columns.cc \
 	function_list_controller.h \
 	function_list_controller.cc \
-	math.h \
-	math.cc
+	pmath.cc \
+	pmath.h \
+	function.cc \
+	function.h
 
 simplegraphplotter_LDFLAGS = 
 
@@ -53,9 +55,7 @@ parser_SOURCES =  \
 	parser/unary_operation.cpp \
 	parser/unary_operation.h \
 	parser/variable.cpp \
-	parser/variable.h \
-	function.h \
-	function.cc
+	parser/variable.h
 
 
 EXTRA_DIST = $(ui_DATA)

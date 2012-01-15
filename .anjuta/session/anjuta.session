@@ -1,19 +1,19 @@
 
 [Anjuta]
-Geometry=908x875+628+295
+Maximized=1
+Geometry=1920x1176+0+24
 
 [Project Manager]
 Shortcut=SimpleGraphPlotter//SimpleGraphPlotter//src//simplegraphplotter
-Expand=SimpleGraphPlotter%%%SimpleGraphPlotter//SimpleGraphPlotter%%%SimpleGraphPlotter//SimpleGraphPlotter//src%%%SimpleGraphPlotter//SimpleGraphPlotter//src//simplegraphplotter%%%SimpleGraphPlotter//SimpleGraphPlotter//src//ui
+Expand=SimpleGraphPlotter%%%SimpleGraphPlotter//SimpleGraphPlotter%%%SimpleGraphPlotter//SimpleGraphPlotter//src%%%SimpleGraphPlotter//SimpleGraphPlotter//src//parser%%%SimpleGraphPlotter//SimpleGraphPlotter//src//simplegraphplotter%%%SimpleGraphPlotter//SimpleGraphPlotter//src//ui
 
 [File Loader]
-Files=file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/main.cc#30%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/simplegraphplotter.ui
+Files=file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/main.cc#35%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/iexpression.h#8%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/iexpression.cpp#1%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/binary_operation.cpp#4%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/binary_operation.h#17%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/constant.cpp#3%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/constant.h#14%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/iparser.cpp#1%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/iparser.h#1%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/parser_test.cpp#11%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/parser_test.h#1%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/unary_operation.cpp#3%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/unary_operation.h#1%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/variable.cpp#3%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/variable.h#8%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/function.h#33%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/function.cc#31%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/parser.cpp#10%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/parser.h#94%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/math.h#19%%%file:///home/jim/Programming/cpp/SimpleGraphPlotter/src/math.cc#1
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
 
 [Execution]
-Program arguments=
 Program uri=file:///home/jim/Programming/cpp/SimpleGraphPlotter/Debug/src/simplegraphplotter
 Run in terminal=2
 Working directories=file:///home/jim/Programming/cpp/SimpleGraphPlotter

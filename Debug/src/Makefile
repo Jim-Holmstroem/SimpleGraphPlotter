@@ -35,7 +35,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = x86_64-unknown-linux-gnu
-bin_PROGRAMS = simplegraphplotter$(EXEEXT)
+bin_PROGRAMS = simplegraphplotter$(EXEEXT) parser$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -48,15 +48,22 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_simplegraphplotter_OBJECTS = main.$(OBJEXT) \
-	plot_drawingarea.$(OBJEXT) model_columns.$(OBJEXT) \
-	function_list_controller.$(OBJEXT)
-simplegraphplotter_OBJECTS = $(am_simplegraphplotter_OBJECTS)
-am__DEPENDENCIES_1 =
-simplegraphplotter_DEPENDENCIES = $(am__DEPENDENCIES_1)
+am_parser_OBJECTS = binary_operation.$(OBJEXT) complex.$(OBJEXT) \
+	constant.$(OBJEXT) iexpression.$(OBJEXT) iparser.$(OBJEXT) \
+	parser.$(OBJEXT) parser_test.$(OBJEXT) \
+	unary_operation.$(OBJEXT) variable.$(OBJEXT)
+parser_OBJECTS = $(am_parser_OBJECTS)
+parser_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
+am_simplegraphplotter_OBJECTS = main.$(OBJEXT) \
+	plot_drawingarea.$(OBJEXT) model_columns.$(OBJEXT) \
+	function_list_controller.$(OBJEXT) pmath.$(OBJEXT) \
+	function.$(OBJEXT)
+simplegraphplotter_OBJECTS = $(am_simplegraphplotter_OBJECTS)
+am__DEPENDENCIES_1 =
+simplegraphplotter_DEPENDENCIES = $(am__DEPENDENCIES_1)
 simplegraphplotter_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(simplegraphplotter_LDFLAGS) \
@@ -103,8 +110,8 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(simplegraphplotter_SOURCES)
-DIST_SOURCES = $(simplegraphplotter_SOURCES)
+SOURCES = $(parser_SOURCES) $(simplegraphplotter_SOURCES)
+DIST_SOURCES = $(parser_SOURCES) $(simplegraphplotter_SOURCES)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -296,15 +303,39 @@ simplegraphplotter_SOURCES = \
 	model_columns.h \
 	model_columns.cc \
 	function_list_controller.h \
-	function_list_controller.cc
+	function_list_controller.cc \
+	pmath.cc \
+	pmath.h \
+	function.cc \
+	function.h
 
 simplegraphplotter_LDFLAGS = 
 simplegraphplotter_LDADD = $(SIMPLEGRAPHPLOTTER_LIBS)
+parser_SOURCES = \
+	parser/binary_operation.cpp \
+	parser/binary_operation.h \
+	parser/complex.cpp \
+	parser/complex.h \
+	parser/constant.cpp \
+	parser/constant.h \
+	parser/iexpression.cpp \
+	parser/iexpression.h \
+	parser/iparser.cpp \
+	parser/iparser.h \
+	parser/parser.cpp \
+	parser/parser.h \
+	parser/parser_test.cpp \
+	parser/parser_test.h \
+	parser/unary_operation.cpp \
+	parser/unary_operation.h \
+	parser/variable.cpp \
+	parser/variable.h
+
 EXTRA_DIST = $(ui_DATA)
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cc .lo .o .obj
+.SUFFIXES: .cc .cpp .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -378,6 +409,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
+parser$(EXEEXT): $(parser_OBJECTS) $(parser_DEPENDENCIES) 
+	@rm -f parser$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(parser_OBJECTS) $(parser_LDADD) $(LIBS)
 simplegraphplotter$(EXEEXT): $(simplegraphplotter_OBJECTS) $(simplegraphplotter_DEPENDENCIES) 
 	@rm -f simplegraphplotter$(EXEEXT)
 	$(AM_V_CXXLD)$(simplegraphplotter_LINK) $(simplegraphplotter_OBJECTS) $(simplegraphplotter_LDADD) $(LIBS)
@@ -388,10 +422,21 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/binary_operation.Po
+include ./$(DEPDIR)/complex.Po
+include ./$(DEPDIR)/constant.Po
+include ./$(DEPDIR)/function.Po
 include ./$(DEPDIR)/function_list_controller.Po
+include ./$(DEPDIR)/iexpression.Po
+include ./$(DEPDIR)/iparser.Po
 include ./$(DEPDIR)/main.Po
 include ./$(DEPDIR)/model_columns.Po
+include ./$(DEPDIR)/parser.Po
+include ./$(DEPDIR)/parser_test.Po
 include ./$(DEPDIR)/plot_drawingarea.Po
+include ./$(DEPDIR)/pmath.Po
+include ./$(DEPDIR)/unary_operation.Po
+include ./$(DEPDIR)/variable.Po
 
 .cc.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -410,6 +455,174 @@ include ./$(DEPDIR)/plot_drawingarea.Po
 #	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .cc.lo:
+	$(AM_V_CXX)$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+#	$(AM_V_CXX) \
+#	source='$<' object='$@' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(LTCXXCOMPILE) -c -o $@ $<
+
+binary_operation.o: parser/binary_operation.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT binary_operation.o -MD -MP -MF $(DEPDIR)/binary_operation.Tpo -c -o binary_operation.o `test -f 'parser/binary_operation.cpp' || echo '$(srcdir)/'`parser/binary_operation.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/binary_operation.Tpo $(DEPDIR)/binary_operation.Po
+#	$(AM_V_CXX) \
+#	source='parser/binary_operation.cpp' object='binary_operation.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o binary_operation.o `test -f 'parser/binary_operation.cpp' || echo '$(srcdir)/'`parser/binary_operation.cpp
+
+binary_operation.obj: parser/binary_operation.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT binary_operation.obj -MD -MP -MF $(DEPDIR)/binary_operation.Tpo -c -o binary_operation.obj `if test -f 'parser/binary_operation.cpp'; then $(CYGPATH_W) 'parser/binary_operation.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/binary_operation.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/binary_operation.Tpo $(DEPDIR)/binary_operation.Po
+#	$(AM_V_CXX) \
+#	source='parser/binary_operation.cpp' object='binary_operation.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o binary_operation.obj `if test -f 'parser/binary_operation.cpp'; then $(CYGPATH_W) 'parser/binary_operation.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/binary_operation.cpp'; fi`
+
+complex.o: parser/complex.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT complex.o -MD -MP -MF $(DEPDIR)/complex.Tpo -c -o complex.o `test -f 'parser/complex.cpp' || echo '$(srcdir)/'`parser/complex.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/complex.Tpo $(DEPDIR)/complex.Po
+#	$(AM_V_CXX) \
+#	source='parser/complex.cpp' object='complex.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o complex.o `test -f 'parser/complex.cpp' || echo '$(srcdir)/'`parser/complex.cpp
+
+complex.obj: parser/complex.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT complex.obj -MD -MP -MF $(DEPDIR)/complex.Tpo -c -o complex.obj `if test -f 'parser/complex.cpp'; then $(CYGPATH_W) 'parser/complex.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/complex.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/complex.Tpo $(DEPDIR)/complex.Po
+#	$(AM_V_CXX) \
+#	source='parser/complex.cpp' object='complex.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o complex.obj `if test -f 'parser/complex.cpp'; then $(CYGPATH_W) 'parser/complex.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/complex.cpp'; fi`
+
+constant.o: parser/constant.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT constant.o -MD -MP -MF $(DEPDIR)/constant.Tpo -c -o constant.o `test -f 'parser/constant.cpp' || echo '$(srcdir)/'`parser/constant.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/constant.Tpo $(DEPDIR)/constant.Po
+#	$(AM_V_CXX) \
+#	source='parser/constant.cpp' object='constant.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o constant.o `test -f 'parser/constant.cpp' || echo '$(srcdir)/'`parser/constant.cpp
+
+constant.obj: parser/constant.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT constant.obj -MD -MP -MF $(DEPDIR)/constant.Tpo -c -o constant.obj `if test -f 'parser/constant.cpp'; then $(CYGPATH_W) 'parser/constant.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/constant.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/constant.Tpo $(DEPDIR)/constant.Po
+#	$(AM_V_CXX) \
+#	source='parser/constant.cpp' object='constant.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o constant.obj `if test -f 'parser/constant.cpp'; then $(CYGPATH_W) 'parser/constant.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/constant.cpp'; fi`
+
+iexpression.o: parser/iexpression.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT iexpression.o -MD -MP -MF $(DEPDIR)/iexpression.Tpo -c -o iexpression.o `test -f 'parser/iexpression.cpp' || echo '$(srcdir)/'`parser/iexpression.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/iexpression.Tpo $(DEPDIR)/iexpression.Po
+#	$(AM_V_CXX) \
+#	source='parser/iexpression.cpp' object='iexpression.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o iexpression.o `test -f 'parser/iexpression.cpp' || echo '$(srcdir)/'`parser/iexpression.cpp
+
+iexpression.obj: parser/iexpression.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT iexpression.obj -MD -MP -MF $(DEPDIR)/iexpression.Tpo -c -o iexpression.obj `if test -f 'parser/iexpression.cpp'; then $(CYGPATH_W) 'parser/iexpression.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/iexpression.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/iexpression.Tpo $(DEPDIR)/iexpression.Po
+#	$(AM_V_CXX) \
+#	source='parser/iexpression.cpp' object='iexpression.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o iexpression.obj `if test -f 'parser/iexpression.cpp'; then $(CYGPATH_W) 'parser/iexpression.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/iexpression.cpp'; fi`
+
+iparser.o: parser/iparser.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT iparser.o -MD -MP -MF $(DEPDIR)/iparser.Tpo -c -o iparser.o `test -f 'parser/iparser.cpp' || echo '$(srcdir)/'`parser/iparser.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/iparser.Tpo $(DEPDIR)/iparser.Po
+#	$(AM_V_CXX) \
+#	source='parser/iparser.cpp' object='iparser.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o iparser.o `test -f 'parser/iparser.cpp' || echo '$(srcdir)/'`parser/iparser.cpp
+
+iparser.obj: parser/iparser.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT iparser.obj -MD -MP -MF $(DEPDIR)/iparser.Tpo -c -o iparser.obj `if test -f 'parser/iparser.cpp'; then $(CYGPATH_W) 'parser/iparser.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/iparser.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/iparser.Tpo $(DEPDIR)/iparser.Po
+#	$(AM_V_CXX) \
+#	source='parser/iparser.cpp' object='iparser.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o iparser.obj `if test -f 'parser/iparser.cpp'; then $(CYGPATH_W) 'parser/iparser.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/iparser.cpp'; fi`
+
+parser.o: parser/parser.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT parser.o -MD -MP -MF $(DEPDIR)/parser.Tpo -c -o parser.o `test -f 'parser/parser.cpp' || echo '$(srcdir)/'`parser/parser.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/parser.Tpo $(DEPDIR)/parser.Po
+#	$(AM_V_CXX) \
+#	source='parser/parser.cpp' object='parser.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o parser.o `test -f 'parser/parser.cpp' || echo '$(srcdir)/'`parser/parser.cpp
+
+parser.obj: parser/parser.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT parser.obj -MD -MP -MF $(DEPDIR)/parser.Tpo -c -o parser.obj `if test -f 'parser/parser.cpp'; then $(CYGPATH_W) 'parser/parser.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/parser.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/parser.Tpo $(DEPDIR)/parser.Po
+#	$(AM_V_CXX) \
+#	source='parser/parser.cpp' object='parser.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o parser.obj `if test -f 'parser/parser.cpp'; then $(CYGPATH_W) 'parser/parser.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/parser.cpp'; fi`
+
+parser_test.o: parser/parser_test.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT parser_test.o -MD -MP -MF $(DEPDIR)/parser_test.Tpo -c -o parser_test.o `test -f 'parser/parser_test.cpp' || echo '$(srcdir)/'`parser/parser_test.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/parser_test.Tpo $(DEPDIR)/parser_test.Po
+#	$(AM_V_CXX) \
+#	source='parser/parser_test.cpp' object='parser_test.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o parser_test.o `test -f 'parser/parser_test.cpp' || echo '$(srcdir)/'`parser/parser_test.cpp
+
+parser_test.obj: parser/parser_test.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT parser_test.obj -MD -MP -MF $(DEPDIR)/parser_test.Tpo -c -o parser_test.obj `if test -f 'parser/parser_test.cpp'; then $(CYGPATH_W) 'parser/parser_test.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/parser_test.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/parser_test.Tpo $(DEPDIR)/parser_test.Po
+#	$(AM_V_CXX) \
+#	source='parser/parser_test.cpp' object='parser_test.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o parser_test.obj `if test -f 'parser/parser_test.cpp'; then $(CYGPATH_W) 'parser/parser_test.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/parser_test.cpp'; fi`
+
+unary_operation.o: parser/unary_operation.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT unary_operation.o -MD -MP -MF $(DEPDIR)/unary_operation.Tpo -c -o unary_operation.o `test -f 'parser/unary_operation.cpp' || echo '$(srcdir)/'`parser/unary_operation.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/unary_operation.Tpo $(DEPDIR)/unary_operation.Po
+#	$(AM_V_CXX) \
+#	source='parser/unary_operation.cpp' object='unary_operation.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o unary_operation.o `test -f 'parser/unary_operation.cpp' || echo '$(srcdir)/'`parser/unary_operation.cpp
+
+unary_operation.obj: parser/unary_operation.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT unary_operation.obj -MD -MP -MF $(DEPDIR)/unary_operation.Tpo -c -o unary_operation.obj `if test -f 'parser/unary_operation.cpp'; then $(CYGPATH_W) 'parser/unary_operation.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/unary_operation.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/unary_operation.Tpo $(DEPDIR)/unary_operation.Po
+#	$(AM_V_CXX) \
+#	source='parser/unary_operation.cpp' object='unary_operation.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o unary_operation.obj `if test -f 'parser/unary_operation.cpp'; then $(CYGPATH_W) 'parser/unary_operation.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/unary_operation.cpp'; fi`
+
+variable.o: parser/variable.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT variable.o -MD -MP -MF $(DEPDIR)/variable.Tpo -c -o variable.o `test -f 'parser/variable.cpp' || echo '$(srcdir)/'`parser/variable.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/variable.Tpo $(DEPDIR)/variable.Po
+#	$(AM_V_CXX) \
+#	source='parser/variable.cpp' object='variable.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o variable.o `test -f 'parser/variable.cpp' || echo '$(srcdir)/'`parser/variable.cpp
+
+variable.obj: parser/variable.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT variable.obj -MD -MP -MF $(DEPDIR)/variable.Tpo -c -o variable.obj `if test -f 'parser/variable.cpp'; then $(CYGPATH_W) 'parser/variable.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/variable.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/variable.Tpo $(DEPDIR)/variable.Po
+#	$(AM_V_CXX) \
+#	source='parser/variable.cpp' object='variable.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o variable.obj `if test -f 'parser/variable.cpp'; then $(CYGPATH_W) 'parser/variable.cpp'; else $(CYGPATH_W) '$(srcdir)/parser/variable.cpp'; fi`
+
+.cpp.o:
+	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+#	$(AM_V_CXX) \
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+#	$(AM_V_CXX) \
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
 	$(AM_V_CXX)$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
 	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 #	$(AM_V_CXX) \

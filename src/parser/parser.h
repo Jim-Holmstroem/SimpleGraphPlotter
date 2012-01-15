@@ -56,7 +56,7 @@ namespace parser {
             static double lt(double x,double y) { return x<y; };
 
         };
-
+    public:
         class parse_exception : public std::exception {
         public:
             explicit parse_exception(std::string msg)

@@ -20,6 +20,8 @@ plotter is free software: you can redistribute it and/or modify it
 
 #include <glibmm/main.h>
 
+#include "pmath.h"
+
 plotter::plot_drawingarea::plot_drawingarea()
 {
 	set_size_request (1000,1000);
@@ -57,6 +59,35 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 	cr->line_to(1.0,0.0);
 	cr->stroke();
 	cr->restore();
+
+	std::vector<function>::const_iterator f = _functions.begin();
+
+	double a=-1.0;
+	double b=1.0;
+	int n=100;
+
+	std::vector<double>* X = pmath::range(a,b,n);
+	for(;f!=_functions.end();++f)
+	{
+		if(*f)
+		{
+			std::vector<double>* f_X = pmath::map(&(*f),X);
+			cr->save();
+			cr->set_source_rgba(1.0,1.0,1.0,0.8);
+
+			std::vector<double>::const_iterator x = X->begin(); 
+			std::vector<double>::const_iterator fx= f_X->begin();
+			for(;x!=X->end();)
+			{
+				cr->move_to(*x,*fx);
+				++x;++fx;
+				cr->line_to(*x,*fx);
+			}
+
+			cr->stroke();
+			cr->restore();
+		}
+	}
 	
 	cr->stroke_preserve();
 	cr->clip();

@@ -1061,6 +1061,8 @@ main.o: /home/jim/Programming/cpp/SimpleGraphPlotter/src/main.cc \
  /usr/include/gtkmm-3.0/gtkmm/viewport.h /usr/include/c++/4.6/iostream \
  ../config.h /usr/include/libintl.h \
  /home/jim/Programming/cpp/SimpleGraphPlotter/src/plot_drawingarea.h \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/function.h \
+ /home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/iexpression.h \
  /home/jim/Programming/cpp/SimpleGraphPlotter/src/model_columns.h \
  /home/jim/Programming/cpp/SimpleGraphPlotter/src/function_list_controller.h
 
@@ -3387,6 +3389,10 @@ main.o: /home/jim/Programming/cpp/SimpleGraphPlotter/src/main.cc \
 /usr/include/libintl.h:
 
 /home/jim/Programming/cpp/SimpleGraphPlotter/src/plot_drawingarea.h:
+
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/function.h:
+
+/home/jim/Programming/cpp/SimpleGraphPlotter/src/parser/iexpression.h:
 
 /home/jim/Programming/cpp/SimpleGraphPlotter/src/model_columns.h:
 

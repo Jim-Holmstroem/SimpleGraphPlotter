@@ -20,6 +20,7 @@ plotter is free software: you can redistribute it and/or modify it
 #include <gtkmm.h>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "config.h"
 
@@ -32,6 +33,7 @@ plotter is free software: you can redistribute it and/or modify it
 #include "plot_drawingarea.h"
 #include "model_columns.h"
 #include "function_list_controller.h"
+#include "function.h"
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/plotter/ui/plotter.ui" */
@@ -75,6 +77,10 @@ main (int argc, char *argv[])
 
 	plotter::plot_drawingarea* pa = new plotter::plot_drawingarea();
 
+	std::vector<plotter::function> funcs;
+	funcs.push_back(plotter::function("sin(x)"));
+	pa->set_functions(funcs);
+	
 	plot_frame->add(*pa);
 	pa->show();
 

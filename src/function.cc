@@ -24,11 +24,12 @@ SimpleGraphPlotter is free software: you can redistribute it and/or modify it
 plotter::function::function(std::string expression)
 : _data(expression)
 {
-	_expression = parser::parser::get_instance()->parse(expression);
-}
-
-double 
-plotter::function::operator()(double x) const
-{
-	return (*_expression)(x);
+	try {
+		_expression = parser::parser::get_instance()->parse(expression);
+		_valid = true; //parse successful
+	}
+	catch(parser::parser::parse_exception pe)
+	{
+		_valid = false;
+	}
 }
