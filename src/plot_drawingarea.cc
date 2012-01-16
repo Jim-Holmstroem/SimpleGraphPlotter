@@ -18,8 +18,6 @@ plotter is free software: you can redistribute it and/or modify it
  */
 #include "plot_drawingarea.h"
 
-#include <iostream>
-
 #include <glibmm/main.h>
 #include <cairomm/matrix.h>
 
@@ -85,7 +83,6 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 			std::vector<double>::const_iterator fx= f_X->begin();
 			for(;x!=X->end();)
 			{
-                                std::cout << "(" << *x << "," << *fx << ")" << std::endl;
                                 cr->move_to(*x,*fx);
 				++x;++fx;
 				cr->line_to(*x,*fx);
