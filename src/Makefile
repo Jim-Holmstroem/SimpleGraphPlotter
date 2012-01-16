@@ -15,8 +15,8 @@ DEP = Makefile
 
 all: $(BIN) 
 
-$(BIN) : $(OBJ) $(DEP) 
-	$(CC) $(OBJ) -o $(BIN) $(LIBS)
+$(BIN) : $(OBJ) $(DEP)
+	$(CC) $(OBJ) `echo parser/*.o | tr ' ' "\n" | egrep -v parser/parser_test.o` -o $(BIN) $(LIBS)
 
 $(OBJ): %.o: %.cc
 	$(CC) $< -o $@ $(CPPFLAGS)
