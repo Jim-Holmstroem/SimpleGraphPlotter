@@ -34,13 +34,8 @@ plotter is free software: you can redistribute it and/or modify it
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/plotter/ui/plotter.ui" */
-#define UI_FILE "src/simplegraphplotter.ui"
+#define UI_FILE "simplegraphplotter.ui"
 #define MULTITHREADED 1
-
-void on_toggle(const Glib::ustring& str)
-{
-	std::cout << "crunk:" << str << std::endl;
-};
 
 int
 main (int argc, char *argv[])
@@ -75,7 +70,11 @@ main (int argc, char *argv[])
 	plotter::plot_drawingarea* pa = new plotter::plot_drawingarea();
 
 	std::vector<plotter::function> funcs;
-	funcs.push_back(plotter::function("sin(x)"));
+	funcs.push_back(plotter::function("6*x"));
+	funcs.push_back(plotter::function("sin(6*x)-0.5"));
+	funcs.push_back(plotter::function("x"));
+	funcs.push_back(plotter::function("tan(x)"));
+	funcs.push_back(plotter::function("x^"));
 	pa->set_functions(funcs);
 	
 	plot_frame->add(*pa);

@@ -18,7 +18,10 @@ plotter is free software: you can redistribute it and/or modify it
  */
 #include "plot_drawingarea.h"
 
+#include <iostream>
+
 #include <glibmm/main.h>
+#include <cairomm/matrix.h>
 
 #include "pmath.h"
 
@@ -46,6 +49,8 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 	cr->translate(1,1);
 	cr->set_line_width(0.001);
 
+        Cairo::Matrix upsidedown = Cairo::Matrix(1,0,0,-1,0,0);
+        cr->transform(upsidedown);
 	cr->save();
 	cr->set_source_rgba(0.0,0.0,0.0,1.0); //green
 	cr->paint();
@@ -62,9 +67,9 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 	std::vector<function>::const_iterator f = _functions.begin();
 
-	double a=-1.0;
-	double b=1.0;
-	int n=100;
+	double a=-1;
+	double b=1;
+	int n=1000;
 
 	std::vector<double>* X = pmath::range(a,b,n);
 	for(;f!=_functions.end();++f)
@@ -74,12 +79,14 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 			std::vector<double>* f_X = pmath::map(&(*f),X);
 			cr->save();
 			cr->set_source_rgba(1.0,1.0,1.0,0.8);
+                        cr->set_line_width(0.003);
 
 			std::vector<double>::const_iterator x = X->begin(); 
 			std::vector<double>::const_iterator fx= f_X->begin();
 			for(;x!=X->end();)
 			{
-				cr->move_to(*x,*fx);
+                                std::cout << "(" << *x << "," << *fx << ")" << std::endl;
+                                cr->move_to(*x,*fx);
 				++x;++fx;
 				cr->line_to(*x,*fx);
 			}

@@ -33,3 +33,4 @@ plotter::function::function(std::string expression)
 		_valid = false;
 	}
 }
+

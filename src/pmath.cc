@@ -29,11 +29,13 @@ std::vector<double>* plotter::pmath::range(double a, double b, int n)
 	}
 	std::vector<double>* ans = new std::vector<double>(n);
 	std::vector<double>::iterator f_a = ans->begin();
-	for(;
+	double x = a;
+        double step=(b-a)/n;
+        for(;
 	    f_a!=ans->end();
-	    ++f_a, a+=((b-a)/n))
+	    ++f_a, x+=step)
 	{
-		*f_a = a;
+		*f_a = x;
 	}
 	return ans;
 }
