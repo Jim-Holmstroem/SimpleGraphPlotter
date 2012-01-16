@@ -77,7 +77,7 @@ namespace parser {
     public:
         virtual iexpression* parse(std::string expr);
 
-		static parser* get_instance(); //TODO could make templated singelton class as interface as singelton<parser> (perhaps add it later)
+		static parser& get_instance(); //TODO could make templated singelton class as interface as singelton<parser> (perhaps add it later)
 		~parser();
     protected:
         std::string _expr;
@@ -104,8 +104,6 @@ namespace parser {
         int _max_level;
 
 	private:
-		static bool instance_flag;
-		static parser* instance;
         explicit parser();
 	};
 

@@ -8,9 +8,6 @@
 #include "unary_operation.h"
 #include "binary_operation.h"
 
-bool parser::parser::instance_flag=false; //C++ can sometimes be ugly  with static, you actually need to allocate it somewhere. 
-parser::parser* parser::parser::instance=NULL;
-
 parser::parser::parser() {
     
     _functions = function_container();
@@ -63,22 +60,13 @@ parser::parser::parser() {
 
 parser::parser::~parser()
 {
-	parser::instance_flag=false;
 };
 
-parser::parser* 
+parser::parser& 
 parser::parser::get_instance() 
 {
-	if(!parser::instance_flag)
-	{
-		parser::instance = new parser();
-		parser::instance_flag = true;
-		return parser::instance;
-	}
-	else
-	{
-		return parser::instance;
-	}
+	static parser p;
+	return p;
 };
 
 bool

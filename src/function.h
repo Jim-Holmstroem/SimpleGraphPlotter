@@ -30,7 +30,7 @@ class function
 {
 public:
 	function(std::string expression); //NOTE non-explicit so one can write function f = "sin(x+2)" and it will get parsed and created properly
-	double operator()(double x) const {(*_expression)(x);};
+	double operator()(double x) const {return (*_expression)(x);};
 	operator bool() const{return _valid;};
 protected:
 	std::string _data;

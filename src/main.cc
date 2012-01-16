@@ -22,9 +22,6 @@ plotter is free software: you can redistribute it and/or modify it
 #include <string>
 #include <vector>
 
-#include "config.h"
-
-
 #ifdef ENABLE_NLS
 #  include <libintl.h>
 #endif

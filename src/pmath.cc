@@ -17,19 +17,35 @@ SimpleGraphPlotter is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "function.h"
+#include "pmath.h"
 
-#include "parser/parser.h"
+#include <algorithm>
 
-plotter::function::function(std::string expression)
-: _data(expression)
+std::vector<double>* plotter::pmath::range(double a, double b, int n)
 {
-	try {
-		_expression = parser::parser::get_instance().parse(expression);
-		_valid = true; //parse successful
-	}
-	catch(parser::parser::parse_exception pe)
+	if(a>b)
 	{
-		_valid = false;
+		std::swap(a,b);
 	}
+	std::vector<double>* ans = new std::vector<double>(n);
+	std::vector<double>::iterator f_a = ans->begin();
+	for(;
+	    f_a!=ans->end();
+	    ++f_a, a+=((b-a)/n))
+	{
+		*f_a = a;
+	}
+	return ans;
+}
+std::vector<double>* plotter::pmath::map(const function* const f, const std::vector<double>* const domain)
+{
+	std::vector<double>* ans = new std::vector<double>(domain->size());
+	std::vector<double>::const_iterator a = domain->begin();
+	std::vector<double>::iterator f_a = ans->begin();
+	
+	for(;f_a!=ans->end();++a,++f_a)
+	{
+		*f_a = (*f)(*a);
+	}
+	return ans;
 }
