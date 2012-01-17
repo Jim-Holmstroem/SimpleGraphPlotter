@@ -33,6 +33,7 @@ plotter::function_list_controller::function_list_controller()
 
 plotter::function_list_controller::function_list_controller(
                                                             Gtk::TreeView* listview /*view*/,
+                                                            plot_drawingarea* plot/*2nd view TODO write about this*/,
                                                             Glib::RefPtr<Gtk::ListStore> store /*model*/,
                                                             Glib::RefPtr<Gtk::CellRendererToggle> show_cellrenderer,
                                                             Glib::RefPtr<Gtk::CellRendererText> function_cellrenderer,
@@ -40,6 +41,7 @@ plotter::function_list_controller::function_list_controller(
                                                             Gtk::Button* remove_button
                                                             ) 
 : _listview(listview)
+, _plot(plot)
 , _store(store)
 , _show_cellrenderer(show_cellrenderer)
 , _function_cellrenderer(function_cellrenderer)
@@ -49,8 +51,7 @@ plotter::function_list_controller::function_list_controller(
 	_add_button->signal_clicked().connect(sigc::mem_fun(*this,&function_list_controller::on_add));
 	_remove_button->signal_clicked().connect(sigc::mem_fun(*this,&function_list_controller::on_remove));
 	_selection = _listview->get_selection();
-	_selection->signal_changed().connect(sigc::mem_fun(*this,&function_list_controller::on_selection_changed));
-
+	_selection->signal_changed().connect(sigc::mem_fun(*this,&function_list_controller::on_selection_changed)); 
 	_show_cellrenderer->signal_toggled().connect(sigc::mem_fun(*this,&function_list_controller::on_cell_toggled));
 	_function_cellrenderer->signal_edited().connect(sigc::mem_fun(*this,&function_list_controller::on_cell_edited));
 }
@@ -58,42 +59,55 @@ plotter::function_list_controller::function_list_controller(
 void
 plotter::function_list_controller::on_add()
 {
-	_store->append();
+    _store->append();
 }
 
 void
 plotter::function_list_controller::on_remove()
 {
-	//NOTE since things are removed the iterator will be invalid eachtime, instead use Gtk::TreeRowReference
-	std::vector<Gtk::TreeModel::Path> paths = _selection->get_selected_rows();
-	std::vector<Gtk::TreeModel::RowReference> rows; //convert all paths to rowreference
-	for(std::vector<Gtk::TreeModel::Path>::iterator it=paths.begin(); it!=paths.end(); ++it)
-		rows.push_back(Gtk::TreeModel::RowReference(_store,*it));
-	for(std::vector<Gtk::TreeModel::RowReference>::iterator it = rows.begin(); it!=rows.end(); ++it)
-	{
-		Gtk::TreeModel::iterator tree_it = _store->get_iter(it->get_path());
-		_store->erase(tree_it);
-	}
+    //NOTE since things are removed the iterator will be invalid eachtime, instead use Gtk::TreeRowReference
+    std::vector<Gtk::TreeModel::Path> paths = _selection->get_selected_rows();
+    std::vector<Gtk::TreeModel::RowReference> rows; //convert all paths to rowreference
+    for(std::vector<Gtk::TreeModel::Path>::iterator it=paths.begin(); it!=paths.end(); ++it)
+        rows.push_back(Gtk::TreeModel::RowReference(_store,*it));
+    for(std::vector<Gtk::TreeModel::RowReference>::iterator it = rows.begin(); it!=rows.end(); ++it)
+    {
+        Gtk::TreeModel::iterator tree_it = _store->get_iter(it->get_path());
+        _store->erase(tree_it);
+    }
+    _plot->queue_draw();
 }
 
 void
 plotter::function_list_controller::on_selection_changed()
 {
-	_remove_button->set_sensitive(_selection->count_selected_rows()>0);
+    _remove_button->set_sensitive(_selection->count_selected_rows()>0);
+}
+
+int int_not(int a) //HACK, works like !(.) but preserves int type
+{
+    if(a)
+        return 0;
+    else
+        return 1;
 }
 
 void
 plotter::function_list_controller::on_cell_toggled(const Glib::ustring& path)
 {
-	Gtk::TreeModel::iterator loc = _store->get_iter(Gtk::TreeModel::Path(path));
-	loc->set_value( _model_columns.show, !static_cast<bool>((*loc)[_model_columns.show])); //NOTE to get the return-type we are using model_columns
+    Gtk::TreeModel::iterator loc = _store->get_iter(Gtk::TreeModel::Path(path));
+    loc->set_value( _model_columns.show, int_not(static_cast<int>((*loc)[_model_columns.show]))); //NOTE to get the return-type we are using model_columns
+    _plot->queue_draw();
 }
 
 void
 plotter::function_list_controller::on_cell_edited(const Glib::ustring& path,const Glib::ustring& data)
 {
-	Gtk::TreeModel::iterator loc = _store->get_iter(Gtk::TreeModel::Path(path));
-	loc->set_value(1,std::string(data));
-	if(!data.empty())
-		loc->set_value(0,true);
+    Gtk::TreeModel::iterator loc = _store->get_iter(Gtk::TreeModel::Path(path));
+    loc->set_value(1,std::string(data));
+    if(!data.empty())
+    {
+        loc->set_value(0,1);
+    }
+    _plot->queue_draw();
 }

@@ -29,9 +29,11 @@ namespace plotter {
 class function
 {
 public:
-	function(std::string expression); //NOTE non-explicit so one can write function f = "sin(x+2)" and it will get parsed and created properly
+	function(); //NOTE only needed by liststore
+        function(const std::string expression); //NOTE non-explicit so one can write function f = "sin(x+2)" and it will get parsed and created properly
 	double operator()(double x) const {return (*_expression)(x);};
 	operator bool() const{return _valid;};
+        const std::string to_string() const{return _data;};
 protected:
 	std::string _data;
 	bool _valid;

@@ -43,7 +43,7 @@ main (int argc, char *argv[])
 	
     #if MULTITHREADED
 	if(!g_thread_supported()) //secure glib
-		g_thread_init(NULL);
+            g_thread_init(NULL);
 	gdk_threads_init(); //secure gtk
 	gdk_threads_enter(); //obtain gtk global lock
     #endif /* MULTITHREADED */
@@ -54,12 +54,12 @@ main (int argc, char *argv[])
 	Glib::RefPtr<Gtk::Builder> builder;
 	try
 	{
-		builder = Gtk::Builder::create_from_file(UI_FILE);
+            builder = Gtk::Builder::create_from_file(UI_FILE);
 	}
 	catch (const Glib::FileError & ex)
 	{
-		std::cerr << ex.what() << std::endl;
-		return 1;
+            std::cerr << ex.what() << std::endl;
+            return 1;
 	}
 	Gtk::Window* main_win = 0;
 	builder->get_widget("main_window", main_win);
@@ -67,47 +67,59 @@ main (int argc, char *argv[])
 	Gtk::Frame* plot_frame = 0;
 	builder->get_widget("plot_frame",plot_frame);
 
-	plotter::plot_drawingarea* pa = new plotter::plot_drawingarea();
-
-	std::vector<plotter::function> funcs;
-	funcs.push_back(plotter::function("6*x"));
-	funcs.push_back(plotter::function("sin(6*x)-0.5"));
-	funcs.push_back(plotter::function("x"));
-	funcs.push_back(plotter::function("tan(x)"));
-	funcs.push_back(plotter::function("x^"));
-	pa->set_functions(funcs);
-	
-	plot_frame->add(*pa);
-	pa->show();
-
 	Gtk::Button* add_button = 0;
 	builder->get_widget("add_button",add_button);
 	Gtk::Button* remove_button = 0;
 	builder->get_widget("remove_button",remove_button);
-	Glib::RefPtr<Gtk::ListStore> list_store = Glib::RefPtr<Gtk::ListStore>::cast_static(builder->get_object("function_store"));
+	Glib::RefPtr<Gtk::ListStore> 
+            list_store = 
+            Glib::RefPtr<Gtk::ListStore>::cast_static(
+                    builder->get_object("function_store")
+            );
 	Gtk::TreeView* function_treeview = 0;
 	builder->get_widget("function_treeview",function_treeview);
 
-
-	Glib::RefPtr<Gtk::CellRendererToggle> show_cellrenderer = Glib::RefPtr<Gtk::CellRendererToggle>::cast_static(builder->get_object("show_cellrenderer"));
-	Glib::RefPtr<Gtk::CellRendererText> function_cellrenderer = Glib::RefPtr<Gtk::CellRendererText>::cast_static(builder->get_object("function_cellrenderer"));
+	Glib::RefPtr<Gtk::CellRendererToggle>
+            show_cellrenderer = 
+            Glib::RefPtr<Gtk::CellRendererToggle>::cast_static(
+                    builder->get_object("show_cellrenderer")
+            );
+	Glib::RefPtr<Gtk::CellRendererText> 
+            function_cellrenderer = 
+            Glib::RefPtr<Gtk::CellRendererText>::cast_static(
+                    builder->get_object("function_cellrenderer")
+            );
 	
-	plotter::function_list_controller* flc = new plotter::function_list_controller(function_treeview,list_store,show_cellrenderer,function_cellrenderer,add_button,remove_button);
+	plotter::plot_drawingarea*
+            plot = 
+            new plotter::plot_drawingarea(list_store);
 
-	Gtk::TreeModel::Row row = (*list_store->append());
-	row.set_value(0,true);
-	row.set_value(1,std::string("testar"));
+    	plot_frame->add(*plot);
+	plot->show();
+	
+        plotter::function_list_controller* 
+            flc = 
+            new plotter::function_list_controller(
+                    function_treeview,
+                    plot,
+                    list_store,
+                    show_cellrenderer,
+                    function_cellrenderer,
+                    add_button,
+                    remove_button
+                );
+
 	
 	if (main_win)
 	{
-		kit.run(*main_win);
+            kit.run(*main_win);
 	}
 	
 	#if MULTITHREADED
 	gdk_threads_leave(); //release gtk's global lock
 	#endif /* MULTITHREADED */
 
-	delete pa;
+	delete plot;
 	delete flc;
 	
 	return 0;

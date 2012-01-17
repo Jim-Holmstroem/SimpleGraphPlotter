@@ -21,16 +21,17 @@ plotter is free software: you can redistribute it and/or modify it
 #define PLOTTER_MODEL_COLUMNS_H
 
 #include <gtkmm/treemodel.h>
+#include "function.h"
 
 namespace plotter 
 {
-	class model_columns: public Gtk::TreeModel::ColumnRecord /* NOTE only used to get the columntype */
-	{
-	public:
-		Gtk::TreeModelColumn<bool> show; //HACK should be gboolean but got some kind of conversion bug in gtk //TODO check why gboolean in glade and bool here?
-		Gtk::TreeModelColumn<gchararray> function;
-		model_columns();
-	};
+    class model_columns: public Gtk::TreeModel::ColumnRecord /* NOTE only used to get the columntype */
+    {
+    public:
+        Gtk::TreeModelColumn<gint> show; //HACK should be gboolean
+        Gtk::TreeModelColumn<Glib::ustring> function; //HACK
+        model_columns();
+    };
 }
 
 #endif /* PLOTTER_MODEL_COLUMNS_H */

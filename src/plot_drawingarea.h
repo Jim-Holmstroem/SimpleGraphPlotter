@@ -23,22 +23,22 @@ plotter is free software: you can redistribute it and/or modify it
 
 #include <cairomm/context.h>
 #include <gtkmm/drawingarea.h>
+#include <gtkmm/liststore.h>
 #include "function.h"
 
 
 namespace plotter {
 
-	class plot_drawingarea : public Gtk::DrawingArea
-	{
-	public:
-		plot_drawingarea();
-		virtual ~plot_drawingarea();
-		void set_functions(const std::vector<function>& functions){_functions = functions;};
-		
-	protected:
-		virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
-		std::vector<function> _functions;
-	};
+    class plot_drawingarea : public Gtk::DrawingArea
+    {
+    public:
+        plot_drawingarea(Glib::RefPtr<Gtk::ListStore> store);
+        virtual ~plot_drawingarea();
+            
+    protected:
+        virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
+        Glib::RefPtr<Gtk::ListStore> _store;
+    };
 
 };
 #endif

@@ -4,17 +4,17 @@
   <object class="GtkListStore" id="function_store">
     <columns>
       <!-- column-name Show -->
-      <column type="gboolean"/>
+      <column type="gint"/>
       <!-- column-name Function -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0">True</col>
+        <col id="0">1</col>
         <col id="1" translatable="yes">sin(x^2-1)^2</col>
       </row>
       <row>
-        <col id="0">True</col>
+        <col id="0">1</col>
         <col id="1" translatable="yes">cos(x)-1/2</col>
       </row>
     </data>

@@ -65,8 +65,8 @@ parser::parser::~parser()
 parser::parser& 
 parser::parser::get_instance() 
 {
-	static parser p;
-	return p;
+    static parser p;
+    return p;
 };
 
 bool

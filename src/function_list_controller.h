@@ -25,6 +25,7 @@ plotter is free software: you can redistribute it and/or modify it
 #include <gtkmm/button.h>
 
 #include "model_columns.h"
+#include "plot_drawingarea.h"
 
 namespace plotter 
 {
@@ -34,7 +35,8 @@ namespace plotter
 	public:
 		function_list_controller();
 		function_list_controller(
-		                         Gtk::TreeView* listview, 
+		                         Gtk::TreeView* listview,
+                                         plot_drawingarea* plot,
 		                         Glib::RefPtr<Gtk::ListStore> store,
 		                         Glib::RefPtr<Gtk::CellRendererToggle> show_cellrenderer,
 		                         Glib::RefPtr<Gtk::CellRendererText> function_cellrenderer,
@@ -49,13 +51,14 @@ namespace plotter
 		void on_cell_edited(const Glib::ustring& location,const Glib::ustring& data);
 			
 		Gtk::TreeView* _listview;
+                plot_drawingarea* _plot;
 		Glib::RefPtr<Gtk::TreeSelection> _selection;
 		Glib::RefPtr<Gtk::ListStore> _store;
 		Glib::RefPtr<Gtk::CellRendererToggle> _show_cellrenderer;
 		Glib::RefPtr<Gtk::CellRendererText> _function_cellrenderer;
 		Gtk::Button* _add_button;
 		Gtk::Button* _remove_button;
-		model_columns _model_columns;
+		model_columns _model_columns; //TODO se if this sucker is used, or if it can be removed
 	};
 
 };

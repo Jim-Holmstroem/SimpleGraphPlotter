@@ -21,16 +21,21 @@ SimpleGraphPlotter is free software: you can redistribute it and/or modify it
 
 #include "parser/parser.h"
 
-plotter::function::function(std::string expression)
+plotter::function::function()
+{
+    _valid = false;
+}
+
+plotter::function::function(const std::string expression)
 : _data(expression)
 {
-	try {
-		_expression = parser::parser::get_instance().parse(expression);
-		_valid = true; //parse successful
-	}
-	catch(parser::parser::parse_exception pe)
-	{
-		_valid = false;
-	}
+    try {
+        _expression = parser::parser::get_instance().parse(expression);
+        _valid = true; //parse successful
+    }
+    catch(parser::parser::parse_exception pe)
+    {
+        _valid = false;
+    }
 }
 
