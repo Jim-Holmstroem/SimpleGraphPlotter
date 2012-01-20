@@ -100,13 +100,13 @@ main (int argc, char *argv[])
         plotter::function_list_controller* 
             flc = 
             new plotter::function_list_controller(
-                    function_treeview,
-                    plot,
+                    *function_treeview,
+                    *plot,
                     list_store,
                     show_cellrenderer,
                     function_cellrenderer,
-                    add_button,
-                    remove_button
+                    *add_button,
+                    *remove_button
                 );
 
 	

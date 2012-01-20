@@ -33,15 +33,14 @@ namespace plotter
 	class function_list_controller
 	{
 	public:
-		function_list_controller();
 		function_list_controller(
-		                         Gtk::TreeView* listview,
-                                         plot_drawingarea* plot,
+		                         Gtk::TreeView& listview,
+                                         plot_drawingarea& plot,
 		                         Glib::RefPtr<Gtk::ListStore> store,
 		                         Glib::RefPtr<Gtk::CellRendererToggle> show_cellrenderer,
 		                         Glib::RefPtr<Gtk::CellRendererText> function_cellrenderer,
-		                         Gtk::Button* add_button,
-		                         Gtk::Button* remove_button
+		                         Gtk::Button& add_button,
+		                         Gtk::Button& remove_button
 		                         );
 	protected:
 		void on_add();
@@ -50,14 +49,14 @@ namespace plotter
 		void on_cell_toggled(const Glib::ustring& location);
 		void on_cell_edited(const Glib::ustring& location,const Glib::ustring& data);
 			
-		Gtk::TreeView* _listview;
-                plot_drawingarea* _plot;
+		Gtk::TreeView& _listview;
+                plot_drawingarea& _plot;
 		Glib::RefPtr<Gtk::TreeSelection> _selection;
 		Glib::RefPtr<Gtk::ListStore> _store;
 		Glib::RefPtr<Gtk::CellRendererToggle> _show_cellrenderer;
 		Glib::RefPtr<Gtk::CellRendererText> _function_cellrenderer;
-		Gtk::Button* _add_button;
-		Gtk::Button* _remove_button;
+		Gtk::Button& _add_button;
+		Gtk::Button& _remove_button;
 		model_columns _model_columns; //TODO se if this sucker is used, or if it can be removed
 	};
 
