@@ -16,6 +16,7 @@ DEP = Makefile
 all: $(BIN) 
 
 $(BIN) : $(OBJ) $(DEP)
+	cd parser;make; cd ..;
 	$(CC) $(OBJ) `echo parser/*.o | tr ' ' "\n" | egrep -v parser/parser_test.o` -o $(BIN) $(LIBS)
 
 $(OBJ): %.o: %.cc
