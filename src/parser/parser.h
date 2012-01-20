@@ -10,7 +10,13 @@
 #include "constant.h"
 #include "variable.h"
 
+
+#define P_PI 3.141562683589793238
+#define P_E 2.718281828459075235
+
 namespace parser {
+
+
 
     typedef double (*function)(double);
     typedef double (*unary_operator)(double);
@@ -59,6 +65,10 @@ namespace parser {
             
             static double gt(double x,double y) { return x>y; };
             static double lt(double x,double y) { return x<y; };
+            
+
+            static double pi(double x) { return P_PI; }
+            static double e(double x) { return P_E; }
 
         };
     public:
@@ -82,8 +92,8 @@ namespace parser {
     public:
         virtual iexpression* parse(std::string expr);
 
-		static parser& get_instance();
-		~parser();
+        static parser& get_instance();
+        ~parser();
     protected:
         std::string _expr;
 

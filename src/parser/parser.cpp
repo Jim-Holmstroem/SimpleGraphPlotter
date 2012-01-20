@@ -33,6 +33,9 @@ parser::parser::parser() {
         _functions["abs"] = &fabs;
         _functions["floor"] = &floor;
 
+        _functions["pi"] = &operators::pi;
+        _functions["e"] = &operators::e;
+
     _unary_ops = unary_container();
         _unary_ops[3] = unary_level(); //NOTE it has the same prio as *
             _unary_ops[3]['+'] = &operators::unit;
