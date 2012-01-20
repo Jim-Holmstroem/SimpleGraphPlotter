@@ -34,9 +34,9 @@ parser::parser::parser() {
         _functions["floor"] = &floor;
 
     _unary_ops = unary_container();
-        _unary_ops[5] = unary_level();
-            _unary_ops[5]['+'] = &operators::unit;
-            _unary_ops[5]['-'] = &operators::neg;
+        _unary_ops[3] = unary_level(); //NOTE it has the same prio as *
+            _unary_ops[3]['+'] = &operators::unit;
+            _unary_ops[3]['-'] = &operators::neg;
     
     _binary_ops= binary_container();
         _binary_ops[0] = binary_level();
