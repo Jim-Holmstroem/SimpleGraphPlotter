@@ -25,11 +25,12 @@ plotter is free software: you can redistribute it and/or modify it
 
 namespace plotter 
 {
-    class model_columns: public Gtk::TreeModel::ColumnRecord /* NOTE only used to get the columntype */
+    /* NOTE only used to get the columntype */
+    class model_columns: public Gtk::TreeModel::ColumnRecord 
     {
     public:
-        Gtk::TreeModelColumn<gint> show; //HACK should be gboolean
-        Gtk::TreeModelColumn<Glib::ustring> function; //HACK
+        Gtk::TreeModelColumn<gint> show;//HACK should be gboolean as in .ui
+        Gtk::TreeModelColumn<Glib::ustring> function;//HACK gchararray as in .ui
         model_columns();
     };
 }

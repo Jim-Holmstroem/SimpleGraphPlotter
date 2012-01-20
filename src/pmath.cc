@@ -21,33 +21,40 @@ SimpleGraphPlotter is free software: you can redistribute it and/or modify it
 
 #include <algorithm>
 
-std::vector<double>* plotter::pmath::range(double a, double b, int n)
+std::vector<double>* plotter::pmath::range(
+        double a, 
+        double b, 
+        int n
+        )
 {
-	if(a>b)
-	{
-		std::swap(a,b);
-	}
-	std::vector<double>* ans = new std::vector<double>(n);
-	std::vector<double>::iterator f_a = ans->begin();
-	double x = a;
-        double step=(b-a)/n;
-        for(;
-	    f_a!=ans->end();
-	    ++f_a, x+=step)
-	{
-		*f_a = x;
-	}
-	return ans;
+    if(a>b)
+    {
+        std::swap(a,b);
+    }
+    std::vector<double>* ans = new std::vector<double>(n);
+    std::vector<double>::iterator f_a = ans->begin();
+    double x = a;
+    double step=(b-a)/n;
+    for(;
+        f_a!=ans->end();
+        ++f_a, x+=step)
+    {
+        *f_a = x;
+    }
+    return ans;
 }
-std::vector<double>* plotter::pmath::map(const function* const f, const std::vector<double>* const domain)
+std::vector<double>* plotter::pmath::map(
+        const function& f, 
+        const std::vector<double>& domain
+        )
 {
-	std::vector<double>* ans = new std::vector<double>(domain->size());
-	std::vector<double>::const_iterator a = domain->begin();
-	std::vector<double>::iterator f_a = ans->begin();
-	
-	for(;f_a!=ans->end();++a,++f_a)
-	{
-		*f_a = (*f)(*a);
-	}
-	return ans;
+    std::vector<double>* ans = new std::vector<double>(domain.size());
+    std::vector<double>::const_iterator a = domain.begin();
+    std::vector<double>::iterator f_a = ans->begin();
+    
+    for(;f_a!=ans->end();++a,++f_a)
+    {
+        *f_a = f(*a);
+    }
+    return ans;
 }

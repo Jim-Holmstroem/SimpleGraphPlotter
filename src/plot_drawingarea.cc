@@ -26,13 +26,20 @@ plotter is free software: you can redistribute it and/or modify it
 #include "model_columns.h"
 #include "pmath.h"
 
-plotter::plot_drawingarea::plot_drawingarea(Glib::RefPtr<Gtk::ListStore> store)
+plotter::plot_drawingarea::plot_drawingarea(
+        Glib::RefPtr<Gtk::ListStore> store
+        )
 : _store(store)
 {
-    set_size_request (1000,1000);
+    set_size_request(1000,1000);
     
     #ifndef GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
-    signal_draw().connect(sigc::mem_fun(*this, &plot_area::on_draw),false);
+    signal_draw().connect(
+            sigc::mem_fun(
+                *this, 
+                &plot_area::on_draw)
+            ,false
+            );
     #endif /* GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED */
 }
 
@@ -41,7 +48,9 @@ plotter::plot_drawingarea::~plot_drawingarea()
 }
 
 bool 
-plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+plotter::plot_drawingarea::on_draw(
+        const Cairo::RefPtr<Cairo::Context>& cr
+        )
 {
     const Gtk::Allocation allocation = get_allocation();
     const int width = allocation.get_width();
@@ -66,9 +75,6 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     cr->line_to(1.0,0.0);
     cr->stroke();
     cr->restore();
-
-
-    //TODO should do lazy-parsing, that is parsing only when it's needed, perhaps use TreeModel::row_changed(const Path& path,const iterator& iter)
     
     const Gtk::TreeModel::Children rows = _store->children();
     std::vector<function> functions;
@@ -79,8 +85,13 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
         Gtk::TreeModel::Row row=*it;
         if(row[mc.show])
         {
-            Glib::ustring expression = row[mc.function]; //NOTE needed to remove the proxy
-            functions.push_back(plotter::function(std::string(expression.c_str())));
+            Glib::ustring expression = row[mc.function];
+            //NOTE needed to remove the proxy
+            functions.push_back(
+                    plotter::function(
+                        std::string(expression.c_str())
+                        )
+                    );
         }
     }
 
@@ -88,7 +99,8 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
     const double a=-1;//box-x
     const double b=1;
-    const double c=-1;//box-y
+    //const double c=-1;//box-y
+    //const double d=1;
 
     const int n=500;
 
@@ -97,7 +109,7 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     {
         if(*f) //if valid function
         {
-            std::vector<double>* f_X = pmath::map(&(*f),X);
+            std::vector<double>* f_X = pmath::map(*f,*X);
             cr->save();
             cr->set_source_rgba(1.0,1.0,1.0,0.8);
             cr->set_line_width(0.003);
@@ -114,15 +126,17 @@ plotter::plot_drawingarea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
                 fx_old=fx++;
                 cr->line_to(*x,*fx);
             }
-
             cr->stroke();
             cr->restore();
+            if(f_X!=NULL)
+                delete f_X;
         }
     }
+    if(X!=NULL)
+        delete X;
     
     cr->stroke_preserve();
     cr->clip();
-
     return true; //SUCCESS
     
 }

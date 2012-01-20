@@ -31,7 +31,10 @@ class pmath
 {
 public:
 	static std::vector<double>* range(double a,double b,int n);
-	static std::vector<double>* map(const function* const f,const std::vector<double>* const domain);
+	static std::vector<double>* map(
+                const function& f,
+                const std::vector<double>& domain
+                );
 protected:
 
 };

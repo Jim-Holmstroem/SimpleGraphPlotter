@@ -21,9 +21,15 @@ SimpleGraphPlotter is free software: you can redistribute it and/or modify it
 
 #include "parser/parser.h"
 
+#include <iostream>
+
 plotter::function::function()
 {
     _valid = false;
+}
+
+plotter::function::~function()
+{
 }
 
 plotter::function::function(const std::string expression)
