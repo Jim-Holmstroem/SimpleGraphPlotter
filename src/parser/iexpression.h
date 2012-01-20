@@ -5,9 +5,8 @@ namespace parser {
     
     class iexpression {   
     public:
-        //virtual double eval(double x) const = 0;
-		virtual double operator()(double x) const = 0;
-        virtual ~iexpression(){}; //TODO explain why this is needed
+        virtual double operator()(double x) const = 0;
+        virtual ~iexpression(){};
     };
 
 }

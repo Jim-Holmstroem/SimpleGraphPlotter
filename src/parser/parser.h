@@ -27,8 +27,13 @@ namespace parser {
     /* EBNF
     *  
     *  plots  = term-(-1),[';',expression-(-1)],'\n'
-    *  expression-i = [unary-i],expression-(i+1),[op-(i+1),expression-i] (* -1 is the lower order expression *) (* either unary-(i+1) or op-(i+1), unary (since on the left) has higher priority  *)
-    *  term-n = var | num | [function],(,term-(-1),) (* n is the number of the highest order operator *) (* function is operinal and if left out it will be the unit function *)
+    *  expression-i = [unary-i],expression-(i+1),[op-(i+1),expression-i]  \\
+    *  (* -1 is the lower order expression *) \\
+    *  (* either unary-(i+1) or op-(i+1), unary (since on the left) \\
+    *  has higher priority  *)
+    *  term-n = var | num | [function],(,term-(-1),) \\
+    *  (* n is the number of the highest order operator *) \\
+    *  (* function is operinal and if left out it will be the unit function *)
     * 
     * op-0 = '>' | '<'
     * op-1 = '+' | '-'
@@ -77,7 +82,7 @@ namespace parser {
     public:
         virtual iexpression* parse(std::string expr);
 
-		static parser& get_instance(); //TODO could make templated singelton class as interface as singelton<parser> (perhaps add it later)
+		static parser& get_instance();
 		~parser();
     protected:
         std::string _expr;
@@ -97,15 +102,16 @@ namespace parser {
         inline static bool is_variable(char c);
         variable* read_variable();
 
-        std::string::iterator _at; //where the parse-queue is at, (pointer+_expr, works as a queue togheter)
+        std::string::iterator _at; //where the parse-queue is at, 
+                                   //(pointer+_expr, works as a queue together)
         function_container _functions;
-        unary_container _unary_ops; //map<level,map<token,operator>>
+        unary_container _unary_ops;
         binary_container _binary_ops;
         int _max_level;
 
-	private:
+    private:
         explicit parser();
-	};
+    };
 
 
 }

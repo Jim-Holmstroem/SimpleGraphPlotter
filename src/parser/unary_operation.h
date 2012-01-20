@@ -18,13 +18,11 @@ namespace parser {
         {
             delete _left;
         };
-
     private:
         unary_op _op;
         iexpression * _left;
-    
     };
-    
+
 }
 
 #endif

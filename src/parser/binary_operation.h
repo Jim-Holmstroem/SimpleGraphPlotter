@@ -8,7 +8,11 @@ namespace parser {
     typedef double(*binary_op)(double,double);
     class binary_operation : public iexpression {
     public:
-        explicit binary_operation(binary_op op,iexpression * left,iexpression * right)
+        explicit binary_operation(
+                binary_op op,
+                iexpression * left,
+                iexpression * right
+                )
         : _op(op)
         , _left(left)
         , _right(right)

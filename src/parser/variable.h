@@ -14,9 +14,8 @@ namespace parser {
         virtual ~variable()
         {
         };
-    private:
-        
     };
+
 }
 
 #endif

@@ -83,7 +83,8 @@ parser::parser::read_constant() {
     double number;
     std::stringstream ss;
     ss.str(std::string(start,_at));
-    ss>>number; //the error will be thrown from here, the count will only be valid if this error is not thrown
+    ss>>number; //the error will be thrown from here,
+                //the count will only be valid if this error is not thrown
     
     return new constant(number);
 };
@@ -120,7 +121,7 @@ parser::iexpression*
 parser::parser::read_expression(int level) {
     if((level-1)==_max_level) //BASE_CASE 
     {
-        if(is_variable(*_at)) //NOTE using 'is_variable' to make it generic, 2D-plots next? 
+        if(is_variable(*_at)) //NOTE using 'is_variable' to make it generic
         {
             return read_variable();
         }
@@ -145,16 +146,20 @@ parser::parser::read_expression(int level) {
         {
             return read_constant();    
         }
-        throw parse_exception("unknown syntax, whats left:'"+std::string(_at,_expr.end())+"'");
+        throw parse_exception(
+                "unknown syntax, whats left:'"+
+                std::string(_at,_expr.end())+
+                "'"
+                );
     }
     else
-    { //term_i = [unary_i],term_(i+1),[op_(i+1),term_(i+1)] //NOTE smarter to use _ instead of -
+    { //term_i = [unary_i],term_(i+1),[op_(i+1),term_(i+1)] 
         iexpression* left=NULL;
         if(is_unary_operator(*_at,level))
         {
-            unary_operator uop = read_unary_operator(level); //POTENTIAL BUG: execution order unknown f(a(),b()), always do it one step at the time
+            unary_operator uop = read_unary_operator(level); 
             iexpression* inner_expression = read_expression(level+1);
-            left = new unary_operation(uop,inner_expression); //TODO the word "expression" is large and the problem should be split up into multiple parsing step, not just one big one
+            left = new unary_operation(uop,inner_expression); 
         }
         else
         {     
@@ -164,7 +169,7 @@ parser::parser::read_expression(int level) {
         if(is_binary_operator(*_at,level+1))
         {
             binary_operator bop = read_binary_operator(level+1);    
-            iexpression* right = read_expression(level); //BUG? should this really be level?
+            iexpression* right = read_expression(level); 
             return new binary_operation(bop,left,right);
         }
         else
@@ -176,7 +181,12 @@ parser::parser::read_expression(int level) {
 
 bool
 parser::parser::is_function(char c) {
-    return (( static_cast<int>(c)>=97 && static_cast<int>(c)<=122 )&&c!='x')||c=='('; //NOTE no magic numbers
+    return (
+            ( static_cast<int>(c)>=97 && static_cast<int>(c)<=122 )
+            &&
+            c!='x')
+        ||
+        c=='(';
 };
 parser::function
 parser::parser::read_function() {
@@ -185,8 +195,12 @@ parser::parser::read_function() {
     if(name.size()==0)
         return &operators::unit;
 
-    if(!_functions.count(name)) //TODO write about how google sees exceptions as forbidden, I only use them sparsly
-        throw parse_exception("'"+name+"' is not a known function.");
+    if(!_functions.count(name)) 
+        throw parse_exception(
+                "'"+
+                name+
+                "' is not a known function."
+                );
     
     _at+=(name.size());
 
@@ -199,7 +213,12 @@ parser::parser::parse(const std::string expr) {
     _at = _expr.begin();
 
     //preprocessing HACK,erase is for cleanup
-    _expr.erase(std::remove_if(_expr.begin(),_expr.end(),&isspace),_expr.end());
+    _expr.erase(std::remove_if(
+                _expr.begin(),
+                _expr.end(),
+                &isspace
+                ),
+            _expr.end());
 
     return read_expression(-1);
 };

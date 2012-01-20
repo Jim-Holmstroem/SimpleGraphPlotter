@@ -17,7 +17,6 @@ namespace parser {
         };    
     private:
         double _c;
-        
     };
 
 }

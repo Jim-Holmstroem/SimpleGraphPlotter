@@ -10,7 +10,6 @@ namespace parser {
     class iparser {
     public:
         virtual iexpression* parse(std::string expr) = 0;
-
     };
 
 }

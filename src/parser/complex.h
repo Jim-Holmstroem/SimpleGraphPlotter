@@ -15,7 +15,7 @@ namespace parser {
             , imag(i)
         {
         };
-        complex(double r) //TODO write something about automatic conversion and non-excplicit constructor in c++
+        complex(double r)
             : real(r)
             , imag(0)
         {
@@ -31,9 +31,9 @@ namespace parser {
         };
         complex operator*(complex c)
         {
-            return complex( real*c.real-imag*c.imag , real*c.imag+c.imag*c.real );
+            return complex(real*c.real-imag*c.imag,real*c.imag+c.imag*c.real);
         };
-        complex operator*(double c) //TODO write something about these being only shortcuts, not really needed since the non-excplicit constructur deals with it converting it to an complex as needed.
+        complex operator*(double c)
         {
             return complex(c*real,c*imag);
         };
@@ -57,8 +57,6 @@ namespace parser {
         {
             return ((*this)*c.conj())/c.abs_square();
         };
-
-    //TODO should this be supported, why?    complex double() 
 
     };
 
