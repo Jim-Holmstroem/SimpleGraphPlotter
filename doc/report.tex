@@ -8,8 +8,6 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 
-
-
 \newcommand{\Cpp}{\texttt{C++}}
 \newcommand{\Gcc}{\texttt{gcc}}
 \newcommand{\Gtkmm}{\texttt{gtkmm}}
@@ -47,13 +45,13 @@ It is compiled with the \texttt{GNU} \Gcc compiler.
 \section{Requirements}
 A few basic things is needed to have a functioning math plotter:
 \begin{enumerate}
-    \item Define a function given ordinary math syntax.
-    \item Parse the inputed function and plot it accordingly.
-    \item Add/Remove functions from plotarea.
-    \item Plotarea should be scrollable both vertical and horizontal.
-    \item Range should be fixed to the unit-cube.\footnote{This restriction will be handled in section \ref{sec:scope}}
-    \item Display axis of the plot.
-    \item Parser must be properly tested.
+\item Define a function given ordinary math syntax.
+\item Parse the inputed function and plot it accordingly.
+\item Add/Remove functions from plotarea.
+\item Plotarea should be scrollable both vertical and horizontal.
+\item Range should be fixed to the unit-cube.\footnote{This restriction will be handled in section \ref{sec:scope}}
+\item Display axis of the plot.
+\item Parser must be properly tested.
 \end{enumerate}
 
 \section{Scope}
@@ -65,20 +63,52 @@ No support for parametric nor complex functions.
 
 \chapter{Structure}
 An basic overview can be seen in figure \ref{fig:UML}
-\section{UML}
 \begin{figure}[ht]
-    \begin{center}
-        \includegraphics[width=\textwidth]{uml.pdf}
-        \caption{\small{An UML showing the structure and the enclosure.}}\label{fig:UML}
-    \end{center}
+\begin{center}
+    \includegraphics[width=\textwidth]{uml.pdf}
+    \caption{\small{An UML showing the structure and the enclosure.}}\label{fig:UML}
+\end{center}
 \end{figure}
 
+\section{Parser}
+The parser code can be divided into to parts the algorithm code, that is the actual parser, and the data structure in the form of a parse tree in which each node has \texttt{iexpression} as baseclass.
 
+TODO order all sections/subsections in descending order of importance (tex. parse should be placed first)
+\subsection{parser}
+<basic description of the class>
+\begin{description}
+    \item[parse(expr : std::string):iexpression*] test
+        TODO make it look like a doxygen (and remove the compileerror)
+        %\begin{description}
+        %    \item[Public]
+        %    \item[Argument: expr] blabla
+        %    \item[Return] iexpression*
 
+        %\end{description}
+        %Public <basic description of the function> TODO should i perhaps move the arguments/return as i doxygen to their own posts?
+\end{description}
+\subsubsection{parse_exception}
+\subsubsection{operators}
+
+\subsection{function_container}
+\subsection{unary_level}
+what is this used for?
+\subsection{iexpression...}
+
+\section{Plotter}
+...
+<images with the different parts enlighted with a red border, that is the parts being described at the moment>
+*aspecially point out the inheritance in the custome widgets.
 
 \chapter{Results and Discussion}
-* Problems with the unofficial c++ wrapper gtkmm, only used it to avoid missing out 
-*
+
+\section{Results}
+<<screenshots>>
+Runned trough valgrind, results?.
+
+\section{Discussion}
+* Problems with the unofficial c++ wrapper gtkmm, only used it to avoid missing out inheritance, polymorphism and to get it compatible with the standard \Cpp Library. 
+* 
 
 
 \end{document}
