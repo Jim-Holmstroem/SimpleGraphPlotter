@@ -1,9 +1,9 @@
 == SimpleGraphPlotter
 SimpleGraphPlotter is a simple program to plot multiple functions.
 
-Compiled and runned by (from /src):
+=== Compiled and runned by (from /src):
     make
     ./simplegraphplotter
 
-Dependencies:
+=== Dependencies:
     gtkmm-3.0
