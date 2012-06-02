@@ -16,13 +16,12 @@
 
 \title{SimpleGraphPlotter v1.6}
 
-\subtitle{}
+\subtitle{Programkonstruktion f\"{o}r F, DD1342\\ Laboration 4A}
 \foreigntitle{}
 \author{Jim Holmstr\"{o}m\\\href{mailto:jimho@kth.se}{jimho@kth.se}}
 \date{\today}
-\blurb{}
+\blurb{Teacher: Ann Bengtson}
 
-%\trita{TRITA xxx yyyy-nn}
 \trita{}
 \begin{document}
 \frontmatter
@@ -56,10 +55,13 @@ A few basic things is needed to have a functioning math plotter:
 
 \section{Scope}
 \label{sec:scope}
-The amount of functionallity that is possible to put in a system like this is almost endless so a few delimitations has to be made in order to complete the project.
+The amount of functionality that is possible to put in a system like this is almost endless so a few delimitations has to be made in order to complete the project.
 The currently biggest restriction to the plotter is the lack of ability to zoom or change the range from the unit-cube.
 No support for parametric nor complex functions.
 \footnote{Since no native support in \Cpp~ for complex numbers which means all the basic math functions would have to be rewritten in order for this to work.}
+
+\section{Assistance}
+
 
 \chapter{Structure}
 An basic overview can be seen in figure \ref{fig:UML}
@@ -79,26 +81,26 @@ TODO order all sections/subsections in descending order of importance (tex. pars
 \begin{description}
     \item[parse(expr : std::string):iexpression*] test
         TODO make it look like a doxygen (and remove the compileerror)
-        %\begin{description}
-        %    \item[Public]
-        %    \item[Argument: expr] blabla
-        %    \item[Return] iexpression*
+        \begin{description}
+            \item[Public]
+            \item[Argument: expr] blabla
+            \item[Return] iexpression*
 
-        %\end{description}
-        %Public <basic description of the function> TODO should i perhaps move the arguments/return as i doxygen to their own posts?
+        \end{description}
+        Public <basic description of the function> TODO should i perhaps move the arguments/return as i doxygen to their own posts?
 \end{description}
-\subsubsection{parse_exception}
+\subsubsection{parse\_exception}
 \subsubsection{operators}
 
-\subsection{function_container}
-\subsection{unary_level}
+%\subsection{function\_container}
+\subsection{unary\_level}
 what is this used for?
 \subsection{iexpression...}
 
 \section{Plotter}
 ...
-<images with the different parts enlighted with a red border, that is the parts being described at the moment>
-*aspecially point out the inheritance in the custome widgets.
+<images with the different parts highlighted with a red border, that is the parts being described at the moment>
+especially point out the inheritance in the custom widgets.
 
 \chapter{Results and Discussion}
 
@@ -107,8 +109,8 @@ what is this used for?
 Runned trough valgrind, results?.
 
 \section{Discussion}
-* Problems with the unofficial c++ wrapper gtkmm, only used it to avoid missing out inheritance, polymorphism and to get it compatible with the standard \Cpp Library. 
-* 
+Problems with the unofficial \Cpp wrapper \Gtkmm, only used it to avoid missing out inheritance, polymorphism and to get it compatible with the standard \Cpp Library. 
+ 
 
 
 \end{document}
