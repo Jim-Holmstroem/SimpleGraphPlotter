@@ -13,7 +13,6 @@
 \newcommand{\Gtkmm}{\texttt{gtkmm}}
 \newcommand{\Gtk}{\texttt{GTK+}}
 
-
 \title{SimpleGraphPlotter v1.6}
 
 \subtitle{Programkonstruktion f\"{o}r F, DD1342\\ Laboration 4A}
@@ -34,11 +33,15 @@
 \pagestyle{newchap}
 
 \chapter{Introduction}
-In the following part firstly the problem will be explained and secondly the requirements for a basic plotter will be enlisted.
-A plotter is a program that can plot functions from strings which defines the functions by ordinary math syntax. 
-This project uses \Cpp~ programming language and a the 
-\Gtkmm\footnote{Documentation, binaries and source can be found at: \href{http://www.gtkmm.org}{www.gtkmm.org}} wrapper for the 
-\Gtk\footnote{Documentation, binaries and source can be found at: \href{http://www.gtk.org}{www.gtk.org}} toolkit to generate the graphical user interface. 
+In the following part firstly the problem will be explained and secondly 
+the requirements for a basic plotter will be enlisted.
+A plotter is a program that can plot functions from strings which defines the 
+functions by ordinary math syntax. 
+This project uses \Cpp~ programming language and the 
+\Gtkmm\footnote{Documentation, binaries and source can be found at: 
+\href{http://www.gtkmm.org}{www.gtkmm.org}} wrapper for the 
+\Gtk\footnote{Documentation, binaries and source can be found at: 
+\href{http://www.gtk.org}{www.gtk.org}} toolkit to generate the graphical user interface. 
 It is compiled with the \texttt{GNU} \Gcc compiler.
 
 \section{Requirements}
@@ -48,23 +51,31 @@ A few basic things is needed to have a functioning math plotter:
 \item Parse the inputed function and plot it accordingly.
 \item Add/Remove functions from plotarea.
 \item Plotarea should be scrollable both vertical and horizontal.
-\item Range should be fixed to the unit-cube.\footnote{This restriction will be handled in section \ref{sec:scope}}
+\item Range should be fixed to the unit-cube.
+        \footnote{This restriction will be handled in section \ref{sec:scope}}
 \item Display axis of the plot.
 \item Parser must be properly tested.
 \end{enumerate}
 
 \section{Scope}
 \label{sec:scope}
-The amount of functionality that is possible to put in a system like this is almost endless so a few delimitations has to be made in order to complete the project.
-The currently biggest restriction to the plotter is the lack of ability to zoom or change the range from the unit-cube.
+The amount of functionality that is possible to put in a system like this is
+almost endless so a few delimitations has to be made in order to complete the project.
+The currently biggest restriction to the plotter is the lack of 
+ability to zoom or change the range from the unit-cube.
 No support for parametric nor complex functions.
-\footnote{Since no native support in \Cpp~ for complex numbers which means all the basic math functions would have to be rewritten in order for this to work.}
+\footnote{
+    Since no native support in \Cpp~ for complex numbers which means 
+    all the basic math functions would have to be rewritten in order for this to work.
+}
 
 \section{Assistance}
-
+Besides the reference manuals for \Gtkmm ~ no external help for this project was
+received.
 
 \chapter{Structure}
-An basic overview can be seen in figure \ref{fig:UML}
+An basic overview of the structure can be seen in figure \ref{fig:UML}, all
+parts will then be enlisted and explained in a \verb+javadoc+ like manner.
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=\textwidth]{uml.pdf}
@@ -73,22 +84,38 @@ An basic overview can be seen in figure \ref{fig:UML}
 \end{figure}
 
 \section{Parser}
-The parser code can be divided into to parts the algorithm code, that is the actual parser, and the data structure in the form of a parse tree in which each node has \texttt{iexpression} as baseclass.
+The parser code can be divided into to parts the algorithm code, that is the 
+actual parser, and the data structure in the form of a parse tree.
 
-TODO order all sections/subsections in descending order of importance (tex. parse should be placed first)
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=\textwidth]{parse-tree.pdf}
+    \caption{\small{
+        An example of the parse tree for the
+        expression \texttt{(x+2)*(x-1)}\texttt{\^~}\!\!\texttt{5}.
+    }}
+   \label{fig:parsetree}
+\end{center}
+\end{figure}
+
+
+
+
+%TODO order all sections/subsections in descending order of importance (tex. parse should be placed first)
 \subsection{parser}
-<basic description of the class>
-<example of a parse tree, with all the different components like pharantehsis
-and funcionts, binary and unary operators. and how they are really handled in
-the parsing>
+%<basic description of the class>
+%<example of a parse tree, with all the different components like pharanthesis
+%and functions, binary and unary operators. and how they are really handled in
+%the parsing>
 
 \begin{description}
-    \item[parse(expr : std::string):iexpression*] test
-        TODO make it look like a doxygen (and remove the compileerror)
+    \item[public parse(expr : std::string)] 
+        Test explain test test test
         \begin{description}
-            \item[Public]
-            \item[Argument: expr] blabla
-            \item[Return] iexpression*
+            \item[Parameters:]~\\
+                \verb+expr+ - test test
+            \item[Returns:]~\\
+                \verb+iexpression*+ - test test
 
         \end{description}
         Public <basic description of the function> TODO should i perhaps move the arguments/return as i doxygen to their own posts?
