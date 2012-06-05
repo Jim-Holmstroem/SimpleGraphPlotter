@@ -76,7 +76,11 @@ received.
 \chapter{Structure}
 An basic overview of the structure can be seen in figure \ref{fig:UML}, all
 public non-self-explanatory parts will then be enlisted and explained in 
-a \verb+javadoc+ like manner.
+a \verb+javadoc+ like manner. In the actual code the definition and
+implementation was separated into \texttt{.h} and \texttt{.cpp}-files
+respectively as long as possible,\footnote{Some small trivial methods where
+left out from this distinction as well as a few things that is hard or
+impossible to separate.} in a \Cpp manner.
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=0.75\textwidth]{uml.pdf}
@@ -104,7 +108,8 @@ tree.\ref{fig:parsetree}
 %TODO order all sections/subsections in descending order of importance (tex. parse should be placed first)
 \subsection{parser}
 The parser is an implementation of a \emph{recursive descent parser}. To
-types of methods are used in the parsing, \texttt{is-a} and \texttt{read-it}.
+types of methods are used in the parsing, \texttt{is-a}\footnote{Starts with
+\texttt{is_}} and \texttt{read-it}\footnote{Starts with \texttt{read_}}.
 The \texttt{is-a} is used for lookahead to determine which type of expression
 lays ahead, while \texttt{read-it} is used to do the actual syntactic information
 gathering from the expression fragment.
