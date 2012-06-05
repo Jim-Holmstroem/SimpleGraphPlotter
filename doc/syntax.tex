@@ -1,0 +1,23 @@
+\begin{verbatim}
+    plots  = term-(-1),[';',expression-(-1)],'\n' (* no support in this
+    implementation *)
+    expression-i = [unary-i],expression-(i+1),[op-(i+1),expression-i]  \\
+    (* -1 is the lowest order expression *) \\
+    (* either unary-(i+1) or op-(i+1), unary (since on the left) \\
+    has higher priority  *)
+    term-n = var | num | [function],(,term-(-1),) \\
+    (* n is the number of the highest order operator *) \\
+    (* if function is left out it will be handled as the unit function *)
+
+    op-0 = '>' | '<'
+    op-1 = '+' | '-'
+    op-2 = '*' | '/' | '%'
+    op-3 = '^'
+    unary-3 = '+' | '-' | '*' 
+    num = ? all numbers ?
+    var = 'x'
+    function = cos | sin | tan | acos | asin | atan | cosh \\
+    | sinh | tanh | exp | log | log10 | sqrt | ceil | abs \\
+    | floor | pi | e (* where pi and e are constant
+    functions *)
+\end{verbatim}
