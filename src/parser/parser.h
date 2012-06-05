@@ -123,7 +123,6 @@ namespace parser {
         explicit parser();
     };
 
-
 }
 
 #endif

@@ -57,7 +57,7 @@ parser::parser::parser() {
         _binary_ops[5] = binary_level();
             _binary_ops[5]['^'] = &pow;
 
-    _max_level=5; //NOTE magicnumber, should bu max(key)
+    _max_level=5; //NOTE magicnumber, should be max(key)
 
 };
 
