@@ -75,17 +75,19 @@ received.
 
 \chapter{Structure}
 An basic overview of the structure can be seen in figure \ref{fig:UML}, all
-parts will then be enlisted and explained in a \verb+javadoc+ like manner.
+public non-self-explanatory parts will then be enlisted and explained in 
+a \verb+javadoc+ like manner.
 \begin{figure}[ht]
 \begin{center}
-    \includegraphics[width=\textwidth]{uml.pdf}
+    \includegraphics[width=0.75\textwidth]{uml.pdf}
     \caption{\small{An UML showing the structure and the enclosure.}}\label{fig:UML}
 \end{center}
 \end{figure}
 
 \section{Parser}
 The parser code can be divided into to parts the algorithm code, that is the 
-actual parser, and the data structure in the form of a parse tree.
+actual parser, and the data structure in the form of a parse
+tree.\ref{fig:parsetree}
 
 \begin{figure}[ht]
 \begin{center}
@@ -101,19 +103,29 @@ actual parser, and the data structure in the form of a parse tree.
 
 %TODO order all sections/subsections in descending order of importance (tex. parse should be placed first)
 \subsection{parser}
+The parser is an implementation of a \emph{recursive descent parser}. To
+types of methods are used in the parsing, \texttt{is-a} and \texttt{read-it}.
+The \texttt{is-a} is used for lookahead to determine which type of expression
+lays ahead, while \texttt{read-it} is used to do the actual syntactic information
+gathering from the expression fragment.
+
+The EBNF syntax for the parsing made by this algorithm is as follows:\\
+\input{syntax.tex}
+
 %<basic description of the class>
 %<example of a parse tree, with all the different components like pharanthesis
 %and functions, binary and unary operators. and how they are really handled in
 %the parsing>
 
 \begin{description}
-    \item[public parse(expr : std::string)] 
-        Test explain test test test
-        \begin{description}
+    \item[public parse(expr : std::string)] Parses the string \texttt{expr} to
+    generate a parse tree that represents the math expression in \texttt{expr}.
+    \begin{description}
             \item[Parameters:]~\\
-                \verb+expr+ - test test
+                \verb+expr+ - The string to be parsed.
             \item[Returns:]~\\
-                \verb+iexpression*+ - test test
+                \verb+iexpression*+ - Returns a pointer to the root of the
+                parse tree.
 
         \end{description}
         Public <basic description of the function> TODO should i perhaps move the arguments/return as i doxygen to their own posts?
@@ -138,7 +150,7 @@ especially point out the inheritance in the custom widgets.
 Runned trough valgrind, results?.
 
 \section{Discussion}
-Problems with the unofficial \Cpp wrapper \Gtkmm, only used it to avoid missing out inheritance, polymorphism and to get it compatible with the standard \Cpp Library. 
+ = Problems with the unofficial \Cpp wrapper \Gtkmm, only used it to avoid missing out inheritance, polymorphism and to get it compatible with the standard \Cpp Library. 
  
 
 
