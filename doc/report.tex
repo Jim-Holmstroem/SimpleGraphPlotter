@@ -162,18 +162,19 @@ The EBNF syntax for the parsing made by this algorithm is as follows:\\
 Acts as abstract base class (ABC) for a node in the parse
 tree, as in for example the nodes in figure \ref{fig:parsetree}. The
 \texttt{iexpression} is a \emph{functor} since it has overloaded the
-\texttt{operator()} and can thus be called in the same way as any other function.
+\texttt{operator} and can thus be called in the same way as any other function.
 The \texttt{operator} can be both 
 \emph{recursively} implemented, as in
     \texttt{unary}\footnote{As can be seen in equation \ref{eq:unarydefined}.} 
     and
     \texttt{binary}\footnote{As can be seen in equation \ref{eq:binarydefined}.}
 , or
-\emph{implicitly} implemented, as in 
-    \texttt{unary}\footnote{As can be seen in equation \ref{eq:unarydefined}.} 
+\emph{explicitly} implemented, as in 
+    \texttt{constant}\footnote{As can be seen in equation \ref{eq:constantdefined}.} 
     and
-    \texttt{binary}\footnote{As can be seen in equation \ref{eq:binarydefined}.}
+    \texttt{variable}\footnote{As can be seen in equation \ref{eq:variabledefined}.}
 .
+The operator function is generally defined by:
 \begin{eqnarray}
     \label{eq:expressiondefined}
     \texttt{expression}: \RR &\rightarrow& \RR \nonumber \\
@@ -182,10 +183,10 @@ The \texttt{operator} can be both
 
 \begin{description}
     \item[public operator(x : double) double const] 
-    Definition of the function for expressions. 
+    Virtual definition of the \emph{evaluation} function for expressions. 
     Since the operator is going to act as an mathematical function one must be certain
     that it behaves like one, that is it does not modifies the functor when
-    called \footnote{In contrast to a method where that behaviour is allowed.}.
+    called.\footnote{In contrast to a method where that behaviour is allowed.}
     Therefore the \texttt{const} keyword has been added to prevent this
     from accidentally happening in the \emph{realizations}.
     \begin{description}
@@ -212,6 +213,19 @@ iexpression this is implemented as a constant-function:
             \verb+c+ - The value of the constant in the expression.
     \end{description}
 \end{description}
+\begin{description}
+    \item[public operator(x : double) double const] 
+    Explicit realization of \texttt{iexpression.operator} returning a
+    constant.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+x+ - Input value of the expression, does not matter only
+            there for compatibility reasons. 
+        \item[Returns:]~\\
+            The output value of the expression.
+    \end{description}
+\end{description}
+
 
 \subsection{class variable} An realization of \texttt{iexpression}
 \ref{sec:iexpression} which represents a variable. A variable can simply be
@@ -232,6 +246,18 @@ seen as a unit-function:
             operation on.
     \end{description}
 \end{description}
+\begin{description}
+    \item[public operator(x : double) double const] 
+    Explicit realization of \texttt{iexpression.operator} returning the value
+    of the input.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+x+ - Input value of the expression.
+        \item[Returns:]~\\
+            The output value of the expression.
+    \end{description}
+\end{description}
+
 
 \subsection{class unary\_operation} An realization of \texttt{iexpression}
 \ref{sec:iexpression} which represents a unary operation, a function
@@ -251,6 +277,18 @@ constructed with \texttt{op} \texttt{left}:
             be a function pointer: \texttt{*unary\_op(double):double}.} .\\
             \verb+left+ - The inner expression on which to perform the
             operation on.
+    \end{description}
+\end{description}
+\begin{description}
+    \item[public operator(x : double) double const] 
+    Recursive realization of \texttt{iexpression.operator} returning the
+    returned value of \texttt{left} through \texttt{op}, as in equation
+    \ref{eq:unarydefined}.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+x+ - Input value for the \texttt{left} expression.
+        \item[Returns:]~\\
+            The returned value from the equation \ref{eq:unarydefined}.
     \end{description}
 \end{description}
 
@@ -275,6 +313,18 @@ constructed with \texttt{op} and \texttt{left/right}:
             operation on. \\
             \verb+right+ - The right expression on which to perform the
             operation on.
+    \end{description}
+\end{description}
+\begin{description}
+    \item[public operator(x : double) double const] 
+    Recursive realization of \texttt{iexpression.operator} returning the
+    returned values of \texttt{left} and \texttt{right} through \texttt{op},
+    as in equation \ref{eq:binarydefined}.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+x+ - Input value for the expression.
+        \item[Returns:]~\\
+            The returned value from the equation \ref{eq:binarydefined}.
     \end{description}
 \end{description}
 
