@@ -80,7 +80,8 @@ a \verb+javadoc+ like manner. In the actual code the definition and
 implementation was separated into \texttt{.h} and \texttt{.cpp}-files
 respectively as long as possible,\footnote{Some small trivial methods where
 left out from this distinction as well as a few things that is hard or
-impossible to separate.} in a \Cpp~ manner.
+impossible to separate in \Cpp.} in a \Cpp~ manner. One goal of the structure
+is to have as flexible code as possible.
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=0.75\textwidth]{uml.pdf}
@@ -90,8 +91,7 @@ impossible to separate.} in a \Cpp~ manner.
 
 \section{Parser}
 The parser code can be divided into to parts the algorithm code, that is the 
-actual parser, and the data structure in the form of a parse
-tree.\ref{fig:parsetree}
+actual parser, and the data structure in the form of a parse tree. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -108,22 +108,32 @@ tree.\ref{fig:parsetree}
 %TODO order all sections/subsections in descending order of importance (tex. parse should be placed first)
 
 \subsection{interface iparser}
+An abstract base class (ABC) that defines the interface for what a parser 
+needs to have to be considered as a parser, in case
+we want to compare different parser implementations.
+\begin{description}
+    \item[public parse(expr : std::string)] Virtual method that should be
+    overloaded so that it will parse the string \texttt{expr} to
+    generate a parse tree that represents the math expression in \texttt{expr}.
+    \begin{description}
+            \item[Parameters:]~\\
+                \verb+expr+ - The string to be parsed.
+            \item[Returns:]~\\
+                \verb+iexpression*+ - Returns a pointer to the root of the
+                parse tree.
+        \end{description}
+\end{description}
 
 \subsection{class parser}
-The parser is an implementation of a \emph{recursive descent parser}. To
+The parser is an implementation of a \emph{recursive descent parser}. Two
 types of methods are used in the parsing, \texttt{is-a}\footnote{Starts with
 \texttt{is\_}} and \texttt{read-it}\footnote{Starts with \texttt{read\_}}.
-The \texttt{is-a} is used for lookahead to determine which type of expression
-lays ahead, while \texttt{read-it} is used to do the actual syntactic information
-gathering from the expression fragment.
+The \texttt{is-a} is used for look-ahead to determine which type of expression
+that lays ahead, while \texttt{read-it} is used to do the actual syntactic 
+information gathering from the expression fragment.
 
 The EBNF syntax for the parsing made by this algorithm is as follows:\\
 \input{syntax.tex}
-
-%<basic description of the class>
-%<example of a parse tree, with all the different components like pharanthesis
-%and functions, binary and unary operators. and how they are really handled in
-%the parsing>
 
 \begin{description}
     \item[public parse(expr : std::string)] Parses the string \texttt{expr} to
@@ -134,18 +144,35 @@ The EBNF syntax for the parsing made by this algorithm is as follows:\\
             \item[Returns:]~\\
                 \verb+iexpression*+ - Returns a pointer to the root of the
                 parse tree.
-
         \end{description}
-        Public <basic description of the function> TODO should i perhaps move the arguments/return as i doxygen to their own posts?
 \end{description}
 
 \subsection{function\_container}
 what is this used for? compare to GUI>function and use ref.
 \subsection{interface iexpression}
+\label{sec:iexpression}
+Acts as abstract base class (ABC) for a node in the parse
+tree, as in for example the nodes in figure \ref{fig:parsetree}.
+\begin{description}
+    \item[public iexpression*)] Constructor ...
+    blabla 
+    \begin{description}
+            \item[Parameters:]~\\
+                \verb+op+ - <<>> an \texttt{unary\_op}\footnote{Typedefined to
+                be a function pointer: \texttt{*binary\_op(double):double}.} .\\
+                \verb+left+ - <<>> .
+        \end{description}
+\end{description}
 
-\subsection{class constant}
-\subsection{class variable}
-\subsection{class unary\_operation}
+
+\subsection{class constant} An realization of \texttt{iexpression}
+\ref{sec:iexpression} which represents a constant. 
+\subsection{class variable} An realization of \texttt{iexpression}
+\ref{sec:iexpression} which represents a constant. 
+
+\subsection{class unary\_operation} An realization of \texttt{iexpression}
+\ref{sec:iexpression} which represents a constant. 
+
 \begin{description}
     \item[public unary\_operation(op : unary\_op, left : iexpression*)] Constructor ...
     blabla 
@@ -155,11 +182,10 @@ what is this used for? compare to GUI>function and use ref.
                 be a function pointer: \texttt{*binary\_op(double):double}.} .\\
                 \verb+left+ - <<>> .
         \end{description}
-        Public <basic description of the function> TODO should i perhaps move the arguments/return as i doxygen to their own posts?
 \end{description}
 
-
-\subsection{class binary\_operation}
+\subsection{class binary\_operation} An realization of \texttt{iexpression}
+\ref{sec:iexpression} which represents a constant. 
 
 \section{Plotter}
 ...
