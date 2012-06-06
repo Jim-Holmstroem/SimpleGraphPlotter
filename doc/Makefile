@@ -10,6 +10,7 @@ clean:
 parse_tree:
 	pdflatex parse-tree.tex
 
-uml_convert:
-	#save in .eps then convert it with this
+uml_export:
+	dia -t png uml.dia
+	dia -t eps uml.dia
 	epstopdf uml.eps
