@@ -5,8 +5,19 @@
 \usepackage[latin1]{inputenc}
 \usepackage[swedish,english]{babel}
 \usepackage{modifications}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
 \usepackage{hyperref}
 \usepackage{graphicx}
+
+\newcommand{\NN}{\ensuremath{\mathbb{N}}}
+\newcommand{\ZZ}{\ensuremath{\mathbb{Z}}}
+\newcommand{\QQ}{\ensuremath{\mathbb{Q}}}
+\newcommand{\RR}{\ensuremath{\mathbb{R}}}
+\newcommand{\CC}{\ensuremath{\mathbb{C}}}
+\newcommand{\GG}{\ensuremath{\mathcal{G}}}
 
 \newcommand{\Cpp}{\texttt{C++}}
 \newcommand{\Gcc}{\texttt{gcc}}
@@ -70,8 +81,8 @@ No support for parametric nor complex functions.
 }
 
 \section{Assistance}
-Besides the reference manuals for \Gtkmm ~ no external help for this project was
-received.
+Besides the reference manuals for \Gtkmm~ and \Cpp~ no external help for 
+this project was received.
 
 \chapter{Structure}
 An basic overview of the structure can be seen in figure \ref{fig:UML}, all
@@ -105,11 +116,9 @@ actual parser, and the data structure in the form of a parse tree.
 \end{center}
 \end{figure}
 
-%TODO order all sections/subsections in descending order of importance (tex. parse should be placed first)
-
 \subsection{interface iparser}
-An abstract base class (ABC) that defines the interface for what a parser 
-needs to have to be considered as a parser, in case
+An \emph{abstract base class} (ABC) that defines the \emph{interface} for what a parser 
+needs to have to be considered as a parser, in case for example
 we want to compare different parser implementations.
 \begin{description}
     \item[public parse(expr : std::string)] Virtual method that should be
@@ -119,7 +128,7 @@ we want to compare different parser implementations.
             \item[Parameters:]~\\
                 \verb+expr+ - The string to be parsed.
             \item[Returns:]~\\
-                \verb+iexpression*+ - Returns a pointer to the root of the
+                A pointer to the root of the
                 parse tree.
         \end{description}
 \end{description}
@@ -142,8 +151,7 @@ The EBNF syntax for the parsing made by this algorithm is as follows:\\
             \item[Parameters:]~\\
                 \verb+expr+ - The string to be parsed.
             \item[Returns:]~\\
-                \verb+iexpression*+ - Returns a pointer to the root of the
-                parse tree.
+                A pointer to the root of the parse tree.
         \end{description}
 \end{description}
 
@@ -152,40 +160,101 @@ what is this used for? compare to GUI>function and use ref.
 \subsection{interface iexpression}
 \label{sec:iexpression}
 Acts as abstract base class (ABC) for a node in the parse
-tree, as in for example the nodes in figure \ref{fig:parsetree}.
+tree, as in for example the nodes in figure \ref{fig:parsetree}. The
+\texttt{iexpression} is a \emph{functor} since it has overloaded the
+\texttt{operator()} and can thus be called in the same way as any other function.
 \begin{description}
-    \item[public iexpression*)] Constructor ...
-    blabla 
+    \item[public operator(x : double) double const]  <note about the const>
     \begin{description}
             \item[Parameters:]~\\
-                \verb+op+ - <<>> an \texttt{unary\_op}\footnote{Typedefined to
-                be a function pointer: \texttt{*binary\_op(double):double}.} .\\
-                \verb+left+ - <<>> .
+                \verb+x+ - 
+            \item[Returns:]~\\
+                The value of this expression given the parameter \texttt{x}.
+        \end{description}
+\end{description}
+
+\subsection{class constant} An \emph{realization} of \texttt{iexpression}
+\ref{sec:iexpression} which represents a constant. To keep constancy with the
+iexpression this is implemented as a constant-function:
+\begin{eqnarray}
+    \label{eq:constantdefined}
+    \texttt{constant}: \RR &\rightarrow& \RR \nonumber \\
+    x &\mapsto& c .
+\end{eqnarray}
+\begin{description}
+    \item[public constant(c : double)] Constructor 
+    that constructs the function in the equation \ref{eq:constantdefined}. 
+    \begin{description}
+            \item[Parameters:]~\\
+                \verb+c+ - The value of the constant in the expression.
+        \end{description}
+\end{description}
+
+\subsection{class variable} An realization of \texttt{iexpression}
+\ref{sec:iexpression} which represents a variable. A variable can simply be
+seen as a unit-function:
+\begin{eqnarray}
+    \label{eq:variabledefined}
+    \texttt{variable}: \RR &\rightarrow& \RR \nonumber \\
+    x &\mapsto& x .
+\end{eqnarray}
+\begin{description}
+    \item[public unary\_operation(op : unary\_op, left : iexpression*)] Constructor 
+    that constructs the function in the equation \ref{eq:unarydefined}. 
+    \begin{description}
+            \item[Parameters:]~\\
+                \verb+op+ - The unary operation performed, which is an \texttt{unary\_op}\footnote{Typedefined to
+                be a function pointer: \texttt{*unary\_op(double):double}.} .\\
+                \verb+left+ - The inner expression on which to perform the
+                operation on.
         \end{description}
 \end{description}
 
 
-\subsection{class constant} An realization of \texttt{iexpression}
-\ref{sec:iexpression} which represents a constant. 
-\subsection{class variable} An realization of \texttt{iexpression}
-\ref{sec:iexpression} which represents a constant. 
-
 \subsection{class unary\_operation} An realization of \texttt{iexpression}
-\ref{sec:iexpression} which represents a constant. 
+\ref{sec:iexpression} which represents a unary operation, a function
+constructed with \texttt{op} \texttt{left}:
+\begin{eqnarray}
+    \label{eq:unarydefined}
+    \texttt{unary}:\RR &\rightarrow& \RR \nonumber \\
+    x &\mapsto& \texttt{op(left(}x\texttt{))}. 
+\end{eqnarray}
 
 \begin{description}
-    \item[public unary\_operation(op : unary\_op, left : iexpression*)] Constructor ...
-    blabla 
+    \item[public unary\_operation(op : unary\_op, left : iexpression*)] Constructor 
+    that constructs the function in the equation \ref{eq:unarydefined}. 
     \begin{description}
             \item[Parameters:]~\\
-                \verb+op+ - <<>> an \texttt{unary\_op}\footnote{Typedefined to
-                be a function pointer: \texttt{*binary\_op(double):double}.} .\\
-                \verb+left+ - <<>> .
+                \verb+op+ - The unary operation performed, which is an \texttt{unary\_op}\footnote{Typedefined to
+                be a function pointer: \texttt{*unary\_op(double):double}.} .\\
+                \verb+left+ - The inner expression on which to perform the
+                operation on.
         \end{description}
 \end{description}
 
 \subsection{class binary\_operation} An realization of \texttt{iexpression}
-\ref{sec:iexpression} which represents a constant. 
+\ref{sec:iexpression} which represents a binary operation, that is a function
+constructed with \texttt{op} and \texttt{left/right}:
+\begin{eqnarray}
+    \label{eq:binarydefined}
+    \texttt{binary}: \RR &\rightarrow& \RR \nonumber \\
+    x &\mapsto& \texttt{op(left(}x\texttt{),right(}x\texttt{))}.
+\end{eqnarray}
+\begin{description}
+    \item[public binary\_operation(op : binary\_op, left : iexpression*, right :
+    iexpression*)] Constructor that constructs the function in the equation
+    \ref{eq:binarydefined}. 
+    \begin{description}
+            \item[Parameters:]~\\
+                \verb+op+ - The unary operation performed, which is an
+                \texttt{binary\_op}\footnote{Typedefined to
+                be a function pointer: \texttt{*binary\_op(double,double):double}.} .\\
+                \verb+left+ - The left expression on which to perform the
+                operation on. \\
+                \verb+right+ - The right expression on which to perform the
+                operation on.
+        \end{description}
+\end{description}
 
 \section{Plotter}
 ...
@@ -208,8 +277,9 @@ Acts as a view for one function
 Runned trough valgrind, results?.
 
 \section{Discussion}
- = Problems with the unofficial \Cpp wrapper \Gtkmm, only used it to avoid missing out inheritance, polymorphism and to get it compatible with the standard \Cpp Library. 
- 
+ = Problems with the unofficial \Cpp wrapper \Gtkmm, only used it to avoid
+ missing out inheritance, polymorphism and to get it compatible with the
+ standard \Cpp Library. Many normal things easily became hacky. 
  = Easy to miss combinations in the parser and have bugs.
 
 \end{document}
