@@ -1,13 +1,10 @@
 \begin{verbatim}
-    plots  = term-(-1),[';',expression-(-1)],'\n' (* no support in this
+    plots  = term-(-1),[';',expression-(-1)],'\n' (* no support for ';' this
     implementation *)
-    expression-i = [unary-i],expression-(i+1),[op-(i+1),expression-i]  \\
     (* -1 is the lowest order expression *) \\
-    (* either unary-(i+1) or op-(i+1), unary (since on the left) \\
-    has higher priority  *)
+    expression-i = [unary-i],expression-(i+1),[op-(i+1),expression-i]  \\
     term-n = var | num | [function],(,term-(-1),) \\
     (* n is the number of the highest order operator *) \\
-    (* if function is left out it will be handled as the unit function *)
 
     op-0 = '>' | '<'
     op-1 = '+' | '-'
@@ -21,3 +18,5 @@
     | floor | pi | e (* where pi and e are constant
     functions *)
 \end{verbatim}
+\footnote{Either unary-(i+1) or op-(i+1), unary (since on the left) \\
+    has higher priority }
