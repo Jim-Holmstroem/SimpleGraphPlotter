@@ -441,13 +441,53 @@ reimplement basecode.\footnote{One should always avoid duplicating code.}
 \end{description}
 
 \begin{description}
-    \item[protected on\_...]~\\
-
+    \item[protected on\_add()]~\\
+    Signal handler for adding a function.
     \begin{description}
         \item[Parameters:]~\\
             \verb+None+
     \end{description}
 \end{description}
+\begin{description}
+    \item[protected on\_remove()]~\\
+    Signal handler for removing a function.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+None+
+    \end{description}
+\end{description}
+\begin{description}
+    \item[protected on\_selection\_changed()]~\\
+    Signal handler for selection change.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+None+
+    \end{description}
+\end{description}
+\begin{description}
+    \item[protected on\_cell\_toggled(location : const Glib::ustring\&)]~\\
+    Signal handler for toggling the visibility of a function.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+location+ - The location in the liststore of the function
+            being toggled.
+    \end{description}
+\end{description}
+\begin{description}
+    \item[protected on\_cell\_edited(location : const Glib::ustring\&, 
+        data : const Glib::ustring\&)]~\\
+    Signal handler for editing a function.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+location+ - The location in the liststore of the function
+            begin edited. \\
+            \verb+data+ - What the function is being edited to.
+    \end{description}
+\end{description}
+
+
+
+
 
 \chapter{Results and Discussion}
 
