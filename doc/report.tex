@@ -75,7 +75,7 @@ The amount of functionality that is possible to put in a system like this is
 almost endless so a few delimitations has to be made in order to complete the project.
 The currently biggest restriction to the plotter is the lack of 
 ability to zoom or change the range from the unit-cube.
-No support for parametric nor complex functions.
+No support for neither parametric nor complex functions.
 \footnote{
     Since no native support in \Cpp~ for complex numbers which means 
     all the basic math functions would have to be rewritten in order for this to work.
@@ -387,7 +387,7 @@ same intended usage and should therefore not be a realization of
     \item[public function(expr : const std::string)] Constructor 
     that constructs the function from the string \texttt{expr}.
     \begin{description}
-        \item[parameters:]~\\
+        \item[Parameters:]~\\
             \verb+expr+ - The expression to use as a function.
     \end{description}
 \end{description}
@@ -399,7 +399,7 @@ TODO
     \item[public plot\_drawingarea(store : Glib::RefPtr<Gtk::ListStore>)] Constructor 
     that constructs \texttt{plot\_drawingarea}. 
     \begin{description}
-        \item[parameters:]~\\
+        \item[Parameters:]~\\
             \verb+store+ - Reference to the liststore that contains the
             functions to be rendered. Must be, or in the same format as
             \texttt{function\_store} defined in the \texttt{.ui}-file.
@@ -427,7 +427,7 @@ reimplement basecode.\footnote{One should always avoid duplicating code.}
     }]~\\
     Constructor for \texttt{function\_list\_controller}.
     \begin{description}
-        \item[parameters:]~\\
+        \item[Parameters:]~\\
             \verb+listview+ - Reference to the view in the list.\\
             \verb+plot+ - Reference to the view of the actual plot of the
             functions.\\
@@ -440,7 +440,14 @@ reimplement basecode.\footnote{One should always avoid duplicating code.}
     \end{description}
 \end{description}
 
-\
+\begin{description}
+    \item[protected on\_...]~\\
+
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+None+
+    \end{description}
+\end{description}
 
 \chapter{Results and Discussion}
 
