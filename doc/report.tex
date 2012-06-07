@@ -408,7 +408,10 @@ TODO
 \end{description}
 
 \subsection{class function\_list\_controller}
-TODO
+A \emph{controller} that handles the functions. The protected methods starting
+with \texttt{on\_} is \emph{action listeners} and can be overriden in a
+new child class to change the functionality on them without the need to
+reimplement basecode.\footnote{One should always avoid duplicating code.}
 \begin{description}
     \item[{
     \parbox[t]{\linewidth}
@@ -423,12 +426,13 @@ TODO
             )
         }
     }]~\\
-    Constructor that constructs... 
+    Constructor for \texttt{function\_list\_controller}.
     \begin{description}
         \item[parameters:]~\\
-            \verb+listview+ - \\
-            \verb+plot+ - \\
-            \verb+store+ - \\
+            \verb+listview+ - Reference to the view in the list.\\
+            \verb+plot+ - Reference to the view of the actual plot of the
+            functions.\\
+            \verb+store+ - Reference to the liststore that handles the functions.\\
             \verb+show_cellrenderer+ - \\
             \verb+add_button+ - A reference to the button that controls adding
             new functions into the \texttt{store}.\\
@@ -437,6 +441,7 @@ TODO
     \end{description}
 \end{description}
 
+\
 
 \chapter{Results and Discussion}
 
