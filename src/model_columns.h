@@ -21,7 +21,6 @@ plotter is free software: you can redistribute it and/or modify it
 #define PLOTTER_MODEL_COLUMNS_H
 
 #include <gtkmm/treemodel.h>
-#include "function.h"
 
 namespace plotter 
 {

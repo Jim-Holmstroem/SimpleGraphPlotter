@@ -24,7 +24,6 @@ plotter is free software: you can redistribute it and/or modify it
 #include <cairomm/context.h>
 #include <gtkmm/drawingarea.h>
 #include <gtkmm/liststore.h>
-#include "function.h"
 
 
 namespace plotter {

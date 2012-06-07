@@ -25,6 +25,7 @@ plotter is free software: you can redistribute it and/or modify it
 
 #include "model_columns.h"
 #include "pmath.h"
+#include "function.h"
 
 plotter::plot_drawingarea::plot_drawingarea(
         Glib::RefPtr<Gtk::ListStore> store

@@ -30,7 +30,6 @@ plotter is free software: you can redistribute it and/or modify it
 #include "plot_drawingarea.h"
 #include "model_columns.h"
 #include "function_list_controller.h"
-#include "function.h"
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/plotter/ui/plotter.ui" */
