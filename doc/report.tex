@@ -11,6 +11,7 @@
 \usepackage{amsfonts}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{enumitem}
 
 \newcommand{\NN}{\ensuremath{\mathbb{N}}}
 \newcommand{\ZZ}{\ensuremath{\mathbb{Z}}}
@@ -91,8 +92,16 @@ a \verb+javadoc+ like manner. In the actual code the definition and
 implementation was separated into \texttt{.h} and \texttt{.cpp}-files
 respectively as long as possible,\footnote{Some small trivial methods where
 left out from this distinction as well as a few things that is hard or
-impossible to separate in \Cpp.} in a \Cpp~ manner. One goal of the structure
-is to have as flexible code as possible.
+impossible to separate in \Cpp.} in a \Cpp~ manner and it mostly follows Google's
+style guide for \Cpp.
+\footnote{The style guide can be found at:
+\href{
+    http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml
+    }{
+    google-styleguide.googlecode.com
+    }
+} 
+The main goal of the structure for this project is to have as flexible code as possible.
 \begin{figure}[ht]
 \begin{center}
     \includegraphics[width=0.75\textwidth]{uml.pdf}
@@ -140,6 +149,8 @@ types of methods are used in the parsing, \texttt{is-a}\footnote{Starts with
 The \texttt{is-a} is used for look-ahead to determine which type of expression
 that lays ahead, while \texttt{read-it} is used to do the actual syntactic 
 information gathering from the expression fragment.
+
+>>>>>>>>TODO, note about the static things<<<<<<<<
 
 The EBNF syntax for the parsing made by this algorithm is as follows:\\
 \input{syntax.tex}
@@ -236,10 +247,10 @@ seen as a unit-function:
     \item[public unary\_operation(op : unary\_op, left : iexpression*)] Constructor 
     that constructs the function in the equation \ref{eq:variabledefined}. 
     \begin{description}
-        \item[Parameters:]~\\
-            \verb+op+ - The unary operation performed, which is an \texttt{unary\_op}\footnote{Typedefined to
+        \item[parameters:]~\\
+            \verb+op+ - the unary operation performed, which is an \texttt{unary\_op}\footnote{typedefined to
             be a function pointer: \texttt{*unary\_op(double):double}.} .\\
-            \verb+left+ - The inner expression on which to perform the
+            \verb+left+ - the inner expression on which to perform the
             operation on.
     \end{description}
 \end{description}
@@ -326,8 +337,31 @@ constructed with \texttt{op} and \texttt{left/right}:
 \end{description}
 
 \section{Plotter}
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=0.75\textwidth]{screenshot00.png}
+    \caption{\small{A screenshot of the program under normal operation.}}
+   \label{fig:screenshot}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=0.75\textwidth]{screenshot00_plotarea.png}
+    \caption{\small{A screenshot of the program under normal operation, with
+    the plotarea highlighted.}}
+   \label{fig:screenshotplotarea}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+    \includegraphics[width=0.75\textwidth]{screenshot00_function_list_controller.png}
+    \caption{\small{A screenshot of the program under normal operation, with
+    the view of the function\_list\_controller highlighted.}}
+   \label{fig:screenshotfunctionlistcontroller}
+\end{center}
+\end{figure}
 
-\centering\includegraphics[width=0.75\textwidth]{screenshot00.png}
+
 The GUI code for the plotter is separated 
 
 MVC ?
@@ -335,15 +369,64 @@ V = plotdrawingarea
 C = functionlistcontroller
 M = what? (combined with something?)
 
-<images with the different parts highlighted with a red border, that is the parts being described at the moment>
-especially point out the inheritance in the custom widgets.
+>images with the different parts highlighted with a red border, that is the parts being described at the moment>
+>especially point out the inheritance in the custom widgets.
+>almost all layout is separetally defined in a .ui file\footnote{Follows XML
+standard.} and loaded by the gtk \emph{builder} at startup.
+>all signal connections are defined in main at generation. (main.cc)
 
 
 \subsection{class function}
-Acts as a view of a function which is used by \texttt{plot\_drawingarea}
+Acts as a model of a function which is used by \texttt{plot\_drawingarea}
+TODO look how it is used, is it a model used by the view=plotdrawingarea...
+
+It has the \emph{signature} for \texttt{iexpression} but it has not got the
+same intended usage and should therefore not be a realization of
+\texttt{iexpression}.
+
+\begin{description}
+    \item[public function(expr : const std::string)] Constructor 
+    that constructs the function from the string \texttt{expr}.
+    \begin{description}
+        \item[parameters:]~\\
+            \verb+expr+ - The expression to use as a function.
+    \end{description}
+\end{description}
 
 \subsection{class plot\_drawingarea}
+
+TODO
+\begin{description}
+    \item[public plot\_drawingarea(store : Glib::RefPtr<Gtk::ListStore>)] Constructor 
+    that constructs \texttt{plot\_drawingarea}. 
+    \begin{description}
+        \item[parameters:]~\\
+            \verb+store+ - Reference to the liststore that contains the
+            functions to be rendered. Must be, or in the same format as
+            \texttt{function\_store} defined in the \texttt{.ui}-file.
+    \end{description}
+\end{description}
+
 \subsection{class function\_list\_controller}
+TODO
+\begin{description}
+    \item[public function\_list\_controller(listview : Gtk::TreeView\&, 
+        plot : plot\_drawingarea\&, 
+        store : Glib::RefPtr<Gtk::ListStore>, 
+        show\_cellrenderer : Glib::RefPtr<Gtk::CellRendererText>, 
+        add\_button : Gtk::Button\&, 
+        remove\_button : Gtk::Button\&)] Constructor 
+    that constructs the function in the equation \ref{eq:variabledefined}. 
+    \begin{description}
+        \item[parameters:]~\\
+            \verb+listview+ - \\
+            \verb+plot+ - \\
+            \verb+store+ - \\
+            \verb+show_cellrenderer+ - \\
+            \verb+add_button+ - \\
+            \verb+remove_button+ - 
+    \end{description}
+\end{description}
 
 
 \chapter{Results and Discussion}
