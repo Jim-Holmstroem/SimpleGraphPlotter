@@ -10,7 +10,6 @@
 
 parser::parser::parser() {
     _functions = function_container();
-
         _functions["cos"] = &cos;
         _functions["sin"] = &sin;
         _functions["tan"] = &tan;
