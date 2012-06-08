@@ -1,5 +1,5 @@
 \begin{verbatim}
-    plots  = term-(-1),[';',expression-(-1)],'\n' (* no support for ';' this
+    plots  = term-(-1),[';',expression-(-1)],'\n' (* no support for ';' this \\
     implementation *) (* -1 is the lowest order expression *)
     expression-i = [unary-i],expression-(i+1),[op-(i+1),expression-i]
     term-n = var | num | [function],(,term-(-1),) \\
@@ -18,4 +18,4 @@
     functions *)
 \end{verbatim}
 In the definition of \texttt{expression-i} either \texttt{unary-(i+1)} or
-\texttt{op-(i+1)} is choosen, unary (since on the left) has higher priority.
+\texttt{op-(i+1)} is choosen. Unary, since on the left, has higher priority.
