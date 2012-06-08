@@ -70,6 +70,7 @@ The codebase can be found at
 }.
 
 \section{Requirements}
+\label{sec:requirements}
 A few basic things is needed to have a functioning math plotter:
 \begin{enumerate}
 \item Define a function given ordinary math syntax.
@@ -448,8 +449,14 @@ get some code and to have the right signature.
 \end{description}
 
 \begin{description}
-   \item[protected on\_draw(cr : const Cairo::RefPtr<Cairo::Context>&]~\\
-    The reference to the \texttt{Cairo::Context} on which to draw on.
+   \item[protected on\_draw(cr : const Cairo::RefPtr<Cairo::Context>\&)]~\\
+   The draw signal handler for the \texttt{plot\_drawingarea}.
+   \begin{description}
+        \item[Parameters:]~\\
+            \verb+cr+ - The reference to the \texttt{Cairo::Context} on which to draw on.
+        \item[Returns:]~\\
+            Mostly true.
+    \end{description}
 \end{description}
 
 \subsection{class function\_list\_controller}
@@ -534,9 +541,8 @@ reimplement basecode.\footnote{One should always avoid code duplication.}
 \chapter{Results and Discussion}
 
 \section{Results}
-
-Runned trough valgrind, results?.
-
+A screenshot of the final result of this project can be seen in figure
+\ref{fig:screenshot}.
 \begin{figure}[H]
 \begin{center}
     \includegraphics[width=0.75\textwidth]{screenshot00.png}
@@ -545,12 +551,29 @@ Runned trough valgrind, results?.
 \end{center}
 \end{figure}
 
-\section{Discussion}
- = Problems with the unofficial \Cpp wrapper \Gtkmm, only used it to avoid
- missing out inheritance, polymorphism and to get it compatible with the
- standard \Cpp Library. Many normal things easily became hacky. 
- = Easy to miss combinations in the parser and have bugs.
+The program did not have any memory leaks under normal operations when tested in the program
+\texttt{valgrind}.
 
- One needs a few iterations of the overall design to get a good flexible structure.
+All the points in the list from section \ref{sec:requirements} was fulfilled
+and failing test case for the parser was found. 
+
+\section{Discussion}
+    \subsection{Problems}
+        The unofficial \Cpp wrapper \Gtkmm, which only was used to avoid
+        missing out inheritance, polymorphism and to get it compatible with
+        some parts of the standard \Cpp Library. Where quite immature and to
+        implement much of the common functionality in this type of application 
+        easily became hacky. 
+        
+        Easy to miss out test case combinations in the parser, the latest miss
+        and one that almost went trough to release was a priority miss between
+        unary and binary operators which resulted in:
+        \begin{equation*}
+            -x^2=(-x)^2
+        \end{equation*}
+
+    \subsection{Reflections}
+        One needs a quite a few iterations of the overall design as well
+        as on the lower level structure to get a good flexible overall structure.
 
 \end{document}
