@@ -10,13 +10,10 @@
 #include "constant.h"
 #include "variable.h"
 
-
 #define P_PI 3.141562683589793238
 #define P_E 2.718281828459075235
 
 namespace parser {
-
-
 
     typedef double (*function)(double);
     typedef double (*unary_operator)(double);
@@ -65,11 +62,9 @@ namespace parser {
             
             static double gt(double x,double y) { return x>y; };
             static double lt(double x,double y) { return x<y; };
-            
 
             static double pi(double x) { return P_PI; }
             static double e(double x) { return P_E; }
-
         };
     public:
         class parse_exception : public std::exception {
@@ -104,7 +99,7 @@ namespace parser {
         unary_operator read_unary_operator(int level);
         inline bool is_binary_operator(char token,int level);
         binary_operator read_binary_operator(int level);
-        inline bool is_function(char c); //start of function or paratheses
+        inline static bool is_function(char c); //start of function or paratheses
         function read_function();
 
         inline static bool is_constant(char c);

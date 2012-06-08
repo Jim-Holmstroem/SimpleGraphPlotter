@@ -9,7 +9,6 @@
 #include "binary_operation.h"
 
 parser::parser::parser() {
-    
     _functions = function_container();
 
         _functions["cos"] = &cos;
@@ -58,7 +57,6 @@ parser::parser::parser() {
             _binary_ops[5]['^'] = &pow;
 
     _max_level=5; //NOTE magicnumber, should be max(key)
-
 };
 
 parser::parser::~parser()
@@ -74,6 +72,7 @@ parser::parser::get_instance()
 
 bool
 parser::parser::is_constant(char c) {
+    //starts with [0-9]
     return ( static_cast<int>(c) >=48 && static_cast<int>(c) <=57 );
 };
 parser::constant* 
@@ -150,9 +149,9 @@ parser::parser::read_expression(int level) {
             return read_constant();    
         }
         throw parse_exception(
-                "unknown syntax, whats left:'"+
-                std::string(_at,_expr.end())+
-                "'"
+                    "unknown syntax, whats left:'"+
+                    std::string(_at,_expr.end())+
+                    "'"
                 );
     }
     else
@@ -184,6 +183,7 @@ parser::parser::read_expression(int level) {
 
 bool
 parser::parser::is_function(char c) {
+    //starts with a non 'x' token or (.
     return (
             ( static_cast<int>(c)>=97 && static_cast<int>(c)<=122 )
             &&
