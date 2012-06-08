@@ -142,17 +142,28 @@ we want to compare different parser implementations.
 \end{description}
 
 \subsection{class parser}
-The parser is an implementation of a \emph{recursive descent parser}. Two
+The parser is an \emph{singelton} implementation of a \emph{recursive descent parser}. Two
 types of methods are used in the parsing, \texttt{is-a}\footnote{Starts with
 \texttt{is\_}} and \texttt{read-it}\footnote{Starts with \texttt{read\_}}.
 The \texttt{is-a} is used for look-ahead to determine which type of expression
 that lays ahead, while \texttt{read-it} is used to do the actual syntactic 
 information gathering from the expression fragment.
 
->>>>>>>>TODO, note about the static things<<<<<<<<
-
 The EBNF syntax for the parsing made by this algorithm is as follows:\\
 \input{syntax.tex}
+
+\begin{description}
+    \item[static public get\_instance()]~\\
+    Gets the singelton instance of the parser, if not yet instantiated it calls
+    the private constructor and instantiates it.
+    \begin{description}
+        \item[Parameters:]~\\
+            \verb+None+
+        \item[Returns:]~\\
+            A pointer to the singelton instance of the parser.
+    \end{description}
+
+\end{description}
 
 \begin{description}
     \item[public parse(expr : std::string)] Parses the string \texttt{expr} to
@@ -360,13 +371,14 @@ constructed with \texttt{op} and \texttt{left/right}:
 \end{center}
 \end{figure}
 
-
-The GUI code for the plotter is separated 
-
-MVC ?
-V = plotdrawingarea
-C = functionlistcontroller
-M = what? (combined with something?)
+The GUI code for the plotter is separated in a \emph{MVC} pattern. 
+The model is the 
+It has two different views for the model 
+(\texttt{Gtk::TreeView} as can be seen
+in figure \ref{fig:screenshotplotarea} and
+\texttt{plot\_drawingarea} as can be seen in figure
+\ref{fig:screenshotfunctionlistcontroller})
+The controller that ...
 
 >images with the different parts highlighted with a red border, that is the parts being described at the moment>
 >especially point out the inheritance in the custom widgets.
@@ -376,9 +388,7 @@ standard.} and loaded by the gtk \emph{builder} at startup.
 
 
 \subsection{class function}
-Acts as a model of a function which is used by \texttt{plot\_drawingarea}
-TODO look how it is used, is it a model used by the view=plotdrawingarea...
-
+Acts as a model of a function which is used by \texttt{plot\_drawingarea}.
 It has the \emph{signature} for \texttt{iexpression} but it has not got the
 same intended usage and should therefore not be a realization of
 \texttt{iexpression}.
@@ -393,11 +403,12 @@ same intended usage and should therefore not be a realization of
 \end{description}
 
 \subsection{class plot\_drawingarea}
+Acts as a plotting view for for the functions in the liststore \texttt{store}
+provided in the constructor.
 
-TODO
 \begin{description}
     \item[public plot\_drawingarea(store : Glib::RefPtr<Gtk::ListStore>)] Constructor 
-    that constructs \texttt{plot\_drawingarea}. 
+    that constructs a \texttt{plot\_drawingarea}. 
     \begin{description}
         \item[Parameters:]~\\
             \verb+store+ - Reference to the liststore that contains the
