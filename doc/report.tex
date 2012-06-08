@@ -83,23 +83,20 @@ A few basic things is needed to have a functioning math plotter:
 
 \section{Scope}
 \label{sec:scope}
-The amount of functionality that is possible to put in a system like this is
+The functionality that is possible to put in a system like this is
 almost endless so a few delimitations has to be made in order to complete the project.
 The currently biggest restriction to the plotter is the lack of 
 ability to zoom or change the range from the unit-cube.
-No support for neither parametric nor complex functions.
-Also no IO support
-\footnote{
-    Since no native support in \Cpp~ for complex numbers which means 
-    all the basic math functions would have to be rewritten in order for this to work.
-}
-
+No support for neither parametric nor complex functions.\footnote{
+Since no native support in \Cpp~ for complex numbers which means 
+all the basic math functions would have to be rewritten in order for this to work.}
+Also no fileIO support.
 \section{Assistance}
 Besides the reference manuals for \Cairo, \Gtkmm~ and \Cpp~, no external help for 
 this project was received.
 
 \section{Compile and Run}
-To code has been tested to be compiled and run under the platform Ubuntu 11.10. 
+To code has been tested to be compiled and executed with Ubuntu 11.10. 
 The program has one non-trivial dependency \Gtkmm\texttt{-3.0} which can be
 installed from the package manager Synaptic under 
 \texttt{libgtkmm-3.0-dev} (compile) 
@@ -110,7 +107,11 @@ Under the folder \texttt{/src} run
 \begin{equation*}
    \texttt{make} 
 \end{equation*}
-
+The parser can also be compiled individually by under the folder
+\texttt{/src/parser} run 
+\begin{equation*}
+   \texttt{make} 
+\end{equation*}
 \subsection{Run}
 To run the program 
 \begin{equation*}
@@ -184,8 +185,8 @@ types of methods are used in the parsing, \texttt{is-a}\footnote{Starts with
 The \texttt{is-a} is used for look-ahead to determine which type of expression
 that lays ahead, while \texttt{read-it} is used to do the actual syntactic 
 information gathering from the expression fragment.
-
-The EBNF syntax for the parsing made by this algorithm is as follows:\\
+The EBNF\footnote{\href{www.cl.cam.ac.uk/~mgk25/iso-14977.pdf}{iso-14977.pdf}}
+syntax for the parsing:\\
 \input{syntax.tex}
 
 Note that the parser has the protected temporary instance variables \texttt{\_expr} and
@@ -390,9 +391,13 @@ The GUI code for the plotter is coarsely separated into a \emph{MVC} pattern.
 The model in this project is the liststore for the \texttt{function}'s. This model 
 has two different views: \texttt{Gtk::TreeView} which lists the functions, as can be seen
 in figure \ref{fig:screenshotfunctionlistcontroller} and
-\texttt{plot\_drawingarea} as can be seen in figure
+\texttt{plot\_drawingarea}, as can be seen in figure
 \ref{fig:screenshotplotarea}.
-The controller in this pattern is the \texttt{function\_list\_controller} .....
+The controller is the \texttt{function\_list\_controller} which handles the
+changes in the model and redraws the views when needed.
+Almost all layout is separately define in a .ui file\footnote{Follows XML
+standard.} which is loaded by the \emph{builder} \texttt{Gtk::Builder} at startup.
+
 \begin{figure}[H]
 \begin{center}
     \includegraphics[width=0.7\textwidth]{screenshot00_plotarea.png}
@@ -405,17 +410,10 @@ The controller in this pattern is the \texttt{function\_list\_controller} .....
 \begin{center}
     \includegraphics[width=0.7\textwidth]{screenshot00_function_list_controller.png}
     \caption{\small{A screenshot of the program under normal operation, with
-    the view of the function\_list\_controller highlighted.}}
+    the treeview and add/remove buttons highlighted.}}
    \label{fig:screenshotfunctionlistcontroller}
 \end{center}
 \end{figure}
-
-
->especially point out the inheritance in the custom widgets.
->almost all layout is separetally defined in a .ui file\footnote{Follows XML
-standard.} and loaded by the gtk \emph{builder} at startup.
->all signal connections are defined in main at generation. (main.cc)
-
 
 \subsection{class function}
 Acts as a model of a function which is used by \texttt{plot\_drawingarea}.
@@ -442,21 +440,23 @@ get some code and to have the right signature.
     that constructs a \texttt{plot\_drawingarea}. 
     \begin{description}
         \item[Parameters:]~\\
-            \verb+store+ - Reference to the liststore that contains the
+            \verb+store+ - Reference\footnote{\texttt{Gtk::RefPtr} is an
+            reference-counting shared smart pointer.} to the liststore that contains the
             functions to be rendered. Must be, or in the same format as
             \texttt{function\_store} defined in the \texttt{.ui}-file.
     \end{description}
 \end{description}
 
 \begin{description}
-   \item[protected on\_draw(cr ...]~\\
+   \item[protected on\_draw(cr : const Cairo::RefPtr<Cairo::Context>&]~\\
+    The reference to the \texttt{Cairo::Context} on which to draw on.
 \end{description}
 
 \subsection{class function\_list\_controller}
 A \emph{controller} that handles the functions. The protected methods starting
 with \texttt{on\_} is \emph{action listeners} and can be overriden in a
 new child class to change the functionality on them without the need to
-reimplement basecode.\footnote{One should always avoid duplicating code.}
+reimplement basecode.\footnote{One should always avoid code duplication.}
 \begin{description}
     \item[{
     \parbox[t]{\linewidth}
