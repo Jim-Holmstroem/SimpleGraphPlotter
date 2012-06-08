@@ -88,6 +88,7 @@ almost endless so a few delimitations has to be made in order to complete the pr
 The currently biggest restriction to the plotter is the lack of 
 ability to zoom or change the range from the unit-cube.
 No support for neither parametric nor complex functions.
+Also no IO support
 \footnote{
     Since no native support in \Cpp~ for complex numbers which means 
     all the basic math functions would have to be rewritten in order for this to work.
@@ -96,6 +97,29 @@ No support for neither parametric nor complex functions.
 \section{Assistance}
 Besides the reference manuals for \Cairo, \Gtkmm~ and \Cpp~, no external help for 
 this project was received.
+
+\section{Compile and Run}
+To code has been tested to be compiled and run under the platform Ubuntu 11.10. 
+The program has one non-trivial dependency \Gtkmm\texttt{-3.0} which can be
+installed from the package manager Synaptic under 
+\texttt{libgtkmm-3.0-dev} (compile) 
+and
+\texttt{libgtkmm-3.0-1} (run).
+\subsection{Compile}
+Under the folder \texttt{/src} run
+\begin{equation*}
+   \texttt{make} 
+\end{equation*}
+
+\subsection{Run}
+To run the program 
+\begin{equation*}
+   \texttt{./simplegraphplotter} 
+\end{equation*}
+The parser can also be executed individually by 
+\begin{equation*}
+    \texttt{./parser/parser\_test "-(x+sin(1+x))" 2}
+\end{equation*}
 
 \chapter{Structure}
 An basic overview of the structure can be seen in figure \ref{fig:UML}, all
