@@ -46,7 +46,7 @@
 
 \chapter{Introduction}
 In the following part firstly the problem will be explained and secondly 
-the requirements for a basic plotter will be enlisted.
+the requirements for a basic plotter will be listed.
 A plotter is a program that can plot functions from strings which defines the 
 functions by ordinary math syntax. 
 This project uses \Cpp~ programming language and the 
@@ -87,7 +87,7 @@ this project was received.
 
 \chapter{Structure}
 An basic overview of the structure can be seen in figure \ref{fig:UML}, all
-public non-self-explanatory parts will then be enlisted and explained in 
+public non-self-explanatory parts will then be listed and explained in 
 a \verb+javadoc+ like manner. In the actual code the definition and
 implementation was separated into \texttt{.h} and \texttt{.cpp}-files
 respectively as long as possible,\footnote{Some small trivial methods where
@@ -162,7 +162,6 @@ The EBNF syntax for the parsing made by this algorithm is as follows:\\
         \item[Returns:]~\\
             A pointer to the singelton instance of the parser.
     \end{description}
-
 \end{description}
 
 \begin{description}
@@ -371,16 +370,14 @@ constructed with \texttt{op} and \texttt{left/right}:
 \end{center}
 \end{figure}
 
-The GUI code for the plotter is separated in a \emph{MVC} pattern. 
-The model is the 
-It has two different views for the model 
-(\texttt{Gtk::TreeView} as can be seen
-in figure \ref{fig:screenshotplotarea} and
+The GUI code for the plotter is coarsely separated into a \emph{MVC} pattern. 
+The model in this project is the liststore for the \texttt{function}'s. This model 
+has two different views: \texttt{Gtk::TreeView} which lists the functions, as can be seen
+in figure \ref{fig:screenshotlistcontroller} and
 \texttt{plot\_drawingarea} as can be seen in figure
-\ref{fig:screenshotfunctionlistcontroller})
-The controller that ...
+\ref{fig:screenshotplotarea}.
+The controller in this pattern is the \texttt{}.
 
->images with the different parts highlighted with a red border, that is the parts being described at the moment>
 >especially point out the inheritance in the custom widgets.
 >almost all layout is separetally defined in a .ui file\footnote{Follows XML
 standard.} and loaded by the gtk \emph{builder} at startup.
