@@ -62,6 +62,12 @@ Also \Cairo
 }
 is used for the raw-rendering.\
 It is compiled with the \texttt{GNU} \Gcc~\texttt{-4.6.1} compiler.
+The codebase can be found at
+\href{
+    https://github.com/Jim-Holmstroem/SimpleGraphPlotter
+}{
+    github.com/Jim-Holmstroem/SimpleGraphPlotter
+}.
 
 \section{Requirements}
 A few basic things is needed to have a functioning math plotter:
@@ -157,6 +163,13 @@ information gathering from the expression fragment.
 
 The EBNF syntax for the parsing made by this algorithm is as follows:\\
 \input{syntax.tex}
+
+Note that the parser has the protected temporary instance variables \texttt{\_expr} and
+\texttt{\_at}. This might as well have been solved by passing them by reference down in the
+parsing to preserve the locality inside the \texttt{parse} method. Avoided this
+in favour for code readability. This technically makes some of the parsing 
+methods non-\emph{static} but since being singelton they can only be one 
+instance per program in the same way as static.
 
 \begin{description}
     \item[static public get\_instance()]~\\
@@ -494,10 +507,10 @@ reimplement basecode.\footnote{One should always avoid duplicating code.}
     \end{description}
 \end{description}
 
-
 \chapter{Results and Discussion}
 
 \section{Results}
+
 Runned trough valgrind, results?.
 
 \begin{figure}[H]
