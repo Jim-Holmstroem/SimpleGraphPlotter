@@ -237,7 +237,8 @@ The \texttt{operator} can be both
     \texttt{unary}\footnote{As can be seen in equation \ref{eq:unarydefined}.} 
     and
     \texttt{binary}\footnote{As can be seen in equation \ref{eq:binarydefined}.}, or
-\emph{explicitly} implemented, as in 
+\emph{explicitly}\footnote{Explicit in the mathematical sense not as the keyword
+in \Cpp.} implemented, as in 
     \texttt{constant}\footnote{As can be seen in equation \ref{eq:constantdefined}.} 
     and
     \texttt{variable}\footnote{As can be seen in equation \ref{eq:variabledefined}.}.
@@ -337,7 +338,7 @@ constructed with \texttt{op} \texttt{left}:
     \begin{description}
         \item[Parameters:]~\\
             \verb+op+ - The unary operation performed, which is an \texttt{unary\_op}\footnote{Typedefined to
-            be a function pointer: \texttt{*unary\_op(double):double}.} .\\
+            be a function pointer: \texttt{*unary\_op(double):double}.}.\\
             \verb+left+ - The inner expression on which to perform the
             operation on.
     \end{description}
@@ -369,9 +370,9 @@ constructed with \texttt{op} and \texttt{left/right}:
     \ref{eq:binarydefined}. 
     \begin{description}
         \item[Parameters:]~\\
-            \verb+op+ - The unary operation performed, which is an
+            \verb+op+ - The unary operation performed, which is a
             \texttt{binary\_op}\footnote{Typedefined to
-            be a function pointer: \texttt{*binary\_op(double,double):double}.} .\\
+            be a function pointer: \texttt{*binary\_op(double,double):double}.}.\\
             \verb+left+ - The left expression on which to perform the
             operation on. \\
             \verb+right+ - The right expression on which to perform the
@@ -400,7 +401,7 @@ in figure \ref{fig:screenshotfunctionlistcontroller} and
 \ref{fig:screenshotplotarea}.
 The controller is the \texttt{function\_list\_controller} which handles the
 changes in the model and redraws the views when needed.
-Almost all layout is separately define in an .ui file\footnote{Follows XML
+Almost all layout is separately define in an \texttt{.ui}-file\footnote{Follows XML
 standard.} which is loaded by the \emph{builder} \texttt{Gtk::Builder} at startup.
 
 \begin{figure}[H]
@@ -438,7 +439,7 @@ same intended usage and should therefore not be a realization of
 \subsection{class plot\_drawingarea}
 Acts as a plotting view for the functions in the liststore \texttt{store}
 provided in the constructor. It inherits from the \texttt{Gtk::DrawingArea} to
-get some code and to have the right signature.
+get some code and to have the right signature to work in the layout.
 
 \begin{description}
     \item[public plot\_drawingarea(store : Glib::RefPtr<Gtk::ListStore>)] Constructor 
@@ -467,7 +468,7 @@ get some code and to have the right signature.
 A \emph{controller} that handles the functions. The protected methods starting
 with \texttt{on\_} is \emph{action listeners} and can be overriden in a
 new child class to change the functionality on them without the need to
-reimplement basecode.\footnote{One should always avoid code duplication.}
+reimplement the basecode.\footnote{One should always avoid code duplication.}
 \begin{description}
     \item[{
     \parbox[t]{\linewidth}
@@ -485,11 +486,12 @@ reimplement basecode.\footnote{One should always avoid code duplication.}
     Constructor for \texttt{function\_list\_controller}.
     \begin{description}
         \item[Parameters:]~\\
-            \verb+listview+ - Reference to the view in the list.\\
-            \verb+plot+ - Reference to the view of the actual plot of the
-            functions.\\
+            \verb+listview+ - Reference to the view of the list.\\
+            \verb+plot+ - Reference to the plot view for the functions.\\
             \verb+store+ - Reference to the liststore that handles the functions.\\
-            \verb+show_cellrenderer+ - \\
+            \verb+show_cellrenderer+ - Reference to the
+            \texttt{Gtk::CellRendererText} which defines the textfield's
+            appearance in the \texttt{store}.\\
             \verb+add_button+ - A reference to the button that controls adding
             new functions into the \texttt{store}.\\
             \verb+remove_button+ - A reference to the button that controls
@@ -559,25 +561,28 @@ The program did not have any memory leaks under normal operations when tested in
 \texttt{valgrind}.
 
 All the points in the list from section \ref{sec:requirements} was fulfilled
-and failing test case for the parser was found. 
+and no failing test cases for the parser was found. 
 
 \section{Discussion}
     \subsection{Problems}
-        The unofficial \Cpp wrapper \Gtkmm, which only was used to avoid
-        missing out inheritance, polymorphism and to get it compatible with
-        some parts of the standard \Cpp Library. Where quite immature and to
-        implement much of the common functionality in this type of application 
-        easily became hacky. 
+        The unofficial \Cpp wrapper 
+        \Gtkmm\footnote{Which only was used to get inheritance, polymorphism
+        and having it  compatible with the standard \Cpp Library.} where quite 
+        immature and to implement much of the common functionality for this 
+        type of applications easily became hacky or needed to workaround bugs. 
+        Also the sparse documentation was sometimes a problem.
         
-        Easy to miss out test case combinations in the parser, the latest miss
-        and one that almost went trough to release was a priority miss between
+        In a parser it is easy to miss out test case combinations, the latest miss
+        which almost went trough to release was a priority miss between
         unary and binary operators which resulted in:
         \begin{equation*}
             -x^2=(-x)^2
         \end{equation*}
+        which is not the case for math expressions.
 
     \subsection{Reflections}
-        One needs quite a few iterations of the overall design as well
-        as on the lower level structure to get an overall good and flexible structure.
+        One needs, even in this rather small project, quite a few iterations 
+        of the overall design as well as on the lower level to get an overall good and flexible
+        structure.
 
 \end{document}
