@@ -51,7 +51,7 @@ In the following part firstly the problem will be explained and secondly
 the requirements for a basic plotter will be listed.
 A plotter is a program that can plot functions from strings which defines the 
 functions by ordinary math syntax. 
-This project uses \Cpp~ programming language and the 
+The project uses \Cpp~ programming language and the 
 \Gtkmm\footnote{Documentation, binaries and source can be found at: 
 \href{http://www.gtkmm.org}{www.gtkmm.org}} wrapper for the 
 \Gtk\footnote{Documentation, binaries and source can be found at: 
@@ -61,13 +61,13 @@ Also \Cairo
 \href{http://www.cairographics.org/}{www.cairographics.org}
 }
 is used for the raw-rendering.\
-It is compiled with the \texttt{GNU} \Gcc~\texttt{-4.6.1} compiler.
-The codebase can be found at
+It is compiled with the GNU \texttt{gcc-4.6.1} compiler and the repository for
+the project can be found at
 \href{
     https://github.com/Jim-Holmstroem/SimpleGraphPlotter
 }{
     github.com/Jim-Holmstroem/SimpleGraphPlotter
-}.
+} and are available under the GNU GPL license.
 
 \section{Requirements}
 \label{sec:requirements}
@@ -124,7 +124,7 @@ The parser can also be executed individually by
 \end{equation*}
 
 \chapter{Structure}
-An basic overview of the structure can be seen in figure \ref{fig:UML}, all
+A basic overview of the structure can be seen in figure \ref{fig:UML}, all
 public non-self-explanatory parts will then be listed and explained in 
 a \verb+javadoc+ like manner. In the actual code the definition and
 implementation was separated into \texttt{.h} and \texttt{.cpp}-files
@@ -165,12 +165,12 @@ tree} data structure.
 
 \subsection{interface iparser}
 An \emph{abstract base class} (ABC) that defines the \emph{interface} for what a parser 
-needs to have to be considered as a parser, in case for example
-we want to compare different parser implementations.
+needs to have to be considered a parser, this in case we want to compare 
+different parser implementations or such.
 \begin{description}
-    \item[public parse(expr : std::string)] Virtual method that should be
-    overloaded so that it will parse the string \texttt{expr} to
-    generate a parse tree that represents the math expression in \texttt{expr}.
+    \item[public parse(expr : std::string)] Virtual method which handles
+    parsing the string \texttt{expr} to generate a parse tree that 
+    represents the math expression in \texttt{expr}.
     \begin{description}
         \item[Parameters:]~\\
             \verb+expr+ - The string to be parsed.
@@ -180,22 +180,28 @@ we want to compare different parser implementations.
 \end{description}
 
 \subsection{class parser}
-The parser is an \emph{singelton} implementation of a \emph{recursive descent parser}. Two
+The parser is a \emph{singelton} \emph{realization} of \texttt{iparser}
+implementing a \emph{recursive descent parser} algorithm. Two
 types of methods are used in the parsing, \texttt{is-a}\footnote{Starts with
 \texttt{is\_}} and \texttt{read-it}\footnote{Starts with \texttt{read\_}}.
-The \texttt{is-a} is used for look-ahead to determine which type of expression
-that lays ahead, while \texttt{read-it} is used to do the actual syntactic 
+The \texttt{is-a} is used for look-ahead to determine the type of the expression
+laying ahead, while \texttt{read-it} is used to do the actual syntactic 
 information gathering from the expression fragment.
 The EBNF\footnote{\href{www.cl.cam.ac.uk/~mgk25/iso-14977.pdf}{iso-14977.pdf}}
 syntax for the parsing:\\
 \input{syntax.tex}
 
-Note that the parser has the protected temporary instance variables \texttt{\_expr} and
-\texttt{\_at}. This might as well have been solved by passing them by reference down in the
-parsing to preserve the locality inside the \texttt{parse} method. Avoided this
-in favour for code readability. This technically makes some of the parsing 
-methods non-\emph{static} but since being singelton they can only be one 
-instance per program in the same way as static.
+Worth noting is that the parser has two protected temporary instance variables
+\texttt{\_expr}
+and
+\texttt{\_at} 
+which are much more non-local than is needed. This might as well have 
+been solved by passing them by reference down in the
+parsing to preserve the locality to within the \texttt{parse} method. In favour
+of code readability the later alternative was not considered.
+This has the consequence that it makes some of the parsing 
+methods technically non-\emph{static}, although the parser as a singelton can
+therefore only have one instance per program in the same way as if it where static.
 
 \begin{description}
     \item[static public get\_instance()]~\\
@@ -225,18 +231,16 @@ instance per program in the same way as static.
 Acts as abstract base class (ABC) for a node in the parse
 tree, as the nodes in figure \ref{fig:parsetree}. The
 \texttt{iexpression} is considered a \emph{functor} since it has overloaded the
-\texttt{operator} and can thus be called in the same way as any other function.
+\texttt{operator} and can thus be called as function.
 The \texttt{operator} can be both 
 \emph{recursively} implemented, as in
     \texttt{unary}\footnote{As can be seen in equation \ref{eq:unarydefined}.} 
     and
-    \texttt{binary}\footnote{As can be seen in equation \ref{eq:binarydefined}.}
-, or
+    \texttt{binary}\footnote{As can be seen in equation \ref{eq:binarydefined}.}, or
 \emph{explicitly} implemented, as in 
     \texttt{constant}\footnote{As can be seen in equation \ref{eq:constantdefined}.} 
     and
-    \texttt{variable}\footnote{As can be seen in equation \ref{eq:variabledefined}.}
-.
+    \texttt{variable}\footnote{As can be seen in equation \ref{eq:variabledefined}.}.
 The operator function is generally defined by:
 \begin{eqnarray}
     \label{eq:expressiondefined}
@@ -247,11 +251,11 @@ The operator function is generally defined by:
 \begin{description}
     \item[public operator(x : double) double const] 
     Virtual definition of the \emph{evaluation} function for expressions. 
-    Since the operator is going to act as an mathematical function one must be certain
+    Since the operator is going to act as a mathematical function one must be certain
     that it behaves like one, that is it does not modifies the functor when
     called.\footnote{In contrast to a method where that behaviour is allowed.}
     Therefore the \texttt{const} keyword has been added to prevent this
-    from accidentally happening in the \emph{realizations}.
+    from accidentally happening in the realizations.
     \begin{description}
         \item[Parameters:]~\\
             \verb+x+ - Input value for the expression. 
@@ -260,7 +264,7 @@ The operator function is generally defined by:
     \end{description}
 \end{description}
 
-\subsection{class constant} An \emph{realization} of \texttt{iexpression}
+\subsection{class constant} A \emph{realization} of \texttt{iexpression}
 \ref{sec:iexpression} which represents a constant. To keep constancy with the
 iexpression this is implemented as a constant-function:
 \begin{eqnarray}
@@ -289,7 +293,7 @@ iexpression this is implemented as a constant-function:
     \end{description}
 \end{description}
 
-\subsection{class variable} An realization of \texttt{iexpression}
+\subsection{class variable} A realization of \texttt{iexpression}
 \ref{sec:iexpression} which represents a variable. A variable can simply be
 seen as a unit-function:
 \begin{eqnarray}
@@ -318,8 +322,8 @@ seen as a unit-function:
 \end{description}
 
 
-\subsection{class unary\_operation} An realization of \texttt{iexpression}
-\ref{sec:iexpression} which represents a unary operation, a function
+\subsection{class unary\_operation} A realization of \texttt{iexpression}
+\ref{sec:iexpression} which represents an unary operation, a function
 constructed with \texttt{op} \texttt{left}:
 \begin{eqnarray}
     \label{eq:unarydefined}
@@ -351,7 +355,7 @@ constructed with \texttt{op} \texttt{left}:
     \end{description}
 \end{description}
 
-\subsection{class binary\_operation} An realization of \texttt{iexpression}
+\subsection{class binary\_operation} A realization of \texttt{iexpression}
 \ref{sec:iexpression} which represents a binary operation, that is a function
 constructed with \texttt{op} and \texttt{left/right}:
 \begin{eqnarray}
