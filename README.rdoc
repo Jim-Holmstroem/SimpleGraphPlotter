@@ -5,7 +5,7 @@ SimpleGraphPlotter is a simple program to plot multiple functions.
     make
     ./simplegraphplotter
 
-=== Supported platforms
+=== Tested platforms
     Ubuntu 11.10
 
 === Dependencies:
