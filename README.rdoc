@@ -10,3 +10,51 @@ SimpleGraphPlotter is a simple program to plot multiple functions.
 
 === Dependencies:
     gtkmm-3.0
+    
+
+From the parser
+https://github.com/Jim-Holmstroem/plotter
+
+#TODO-LIST :D
+
+#support for complex numbers (C++)
+#different log-bases (log2)
+#add constants math.pi and math.e
+#add functions with multiple arguments fun(,term-(-1),term-(-1),), lambda-functions ?
+
+
+#KNOWN BUGS
+#
+# 1.doesn't modulo imaginary numbers (but stills plot the right value but without modulos)
+# 2. sin(x)^101 is plotted with both real-imaginary and normal part..
+#
+
+
+#SUPPORTS
+#
+# 1. Complex constans in the form "a+bi" where, i = "1i" (Python)
+# 2. Plotting Complexvalued functions by having a blue (real-part) and red (imag-part) (Python)
+# 3. Conjugate complex functions including operators (Python)
+# 4. Plot multiple functions seperated with ';'
+# 5. Comparison operators (ex. heavside = (x>0) 
+#
+
+
+#TESTS (complex tests currently only works on Python)
+#
+# f = atan(log(sqrt(x)-1))^3 [works]
+# f = log(x)^3/5 [works]
+# f = +(log(x)) [works]
+# f = *(log(x)) [works]
+# f = sin(x)*(x>0) [works]
+# f = (x>3)+(x>2)+(x>1)+(x>0) [works]
+# f = sin(x) > 0 [works]
+# f = sin(x);cos(x);-sin(x);-cos(x) [works [works]
+# f = (1+1i)**asin(x) 
+
+
+#DOCS
+# 
+# 1. how parser::_expr together with parser::_at works a lightweight queue
+# 2. const all over the place
+#
