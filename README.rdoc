@@ -12,7 +12,7 @@ SimpleGraphPlotter is a simple program to plot multiple functions.
     gtkmm-3.0
     
 
-From the parser
+=== From the parser
 https://github.com/Jim-Holmstroem/plotter
 
 #TODO-LIST :D
